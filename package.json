@@ -1,5 +1,5 @@
 {
-  "name": "project-name",
+  "name": "airquality-aware",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vannizhang/React-TypeScript-App-Template.git"
+    "url": "git+https://github.com/vannizhang/airquality-aware.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/vannizhang/{project-name}/issues"
+    "url": "https://github.com/vannizhang/airquality-aware/issues"
   },
-  "homepage": "https://github.com/vannizhang/{project-name}#readme",
+  "homepage": "https://github.com/vannizhang/airquality-aware#readme",
   "devDependencies": {
     "@babel/core": "^7.10.2",
     "@babel/plugin-proposal-class-properties": "^7.10.1",
@@ -54,7 +54,7 @@
     "webpack": "^4.43.0",
     "webpack-bundle-analyzer": "^3.8.0",
     "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.10.3"
+    "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
     "axios": "^0.19.2",

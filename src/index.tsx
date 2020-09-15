@@ -4,6 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import AppContextProvider from './contexts/AppContextProvider';
+import App from './components/App/App';
 
 import { setDefaultOptions } from 'esri-loader';
 
@@ -13,7 +14,7 @@ setDefaultOptions({
 
 ReactDOM.render(
     <AppContextProvider>
-        <h5>hello world</h5>
+        <App />
     </AppContextProvider>,
     document.getElementById('root')
 );

@@ -1,10 +1,16 @@
-import React from 'react';
+import React, {
+    useContext
+} from 'react';
 
 import { loadModules, loadCss } from 'esri-loader';
 import IMapView from 'esri/views/MapView';
 import IWebMap from "esri/WebMap";
 
-interface Props {
+import { AppContext } from '../../contexts/AppContextProvider';
+
+import { UIConfig } from '../../AppConfig';
+
+type Props = {
     webmapId: string;
 };
 
@@ -12,6 +18,8 @@ const MapView:React.FC<Props> = ({
     webmapId,
     children
 })=>{
+
+    const { isMobile } = useContext(AppContext)
 
     const mapDivRef = React.useRef<HTMLDivElement>();
 
@@ -37,6 +45,9 @@ const MapView:React.FC<Props> = ({
                         id: webmapId
                     }  
                 }),
+                padding: {
+                    right: !isMobile ? UIConfig["sidebar-width"] : undefined
+                }
             });
 
             view.when(()=>{
