@@ -10,12 +10,18 @@ import { AppContext } from '../../contexts/AppContextProvider';
 
 import { UIConfig } from '../../AppConfig';
 
+import {
+    QueryLocation
+} from 'air-quality-aware';
+
 type Props = {
     webmapId: string;
+    onClickHandler: (data:QueryLocation)=>void;
 };
 
 const MapView:React.FC<Props> = ({
     webmapId,
+    onClickHandler,
     children
 })=>{
 
@@ -59,10 +65,24 @@ const MapView:React.FC<Props> = ({
         }
     };
 
+    const initEventListeners = () => {
+        mapView.on('click', (event) => {
+            const mapPoint = event.mapPoint.toJSON() as QueryLocation;
+            onClickHandler(mapPoint);
+        });
+    };
+
     React.useEffect(()=>{
         loadCss();
         initMapView();
     }, []);
+
+    
+    React.useEffect(()=>{
+        if(mapView){
+            initEventListeners();
+        }
+    }, [mapView]);
 
     return (
         <>
