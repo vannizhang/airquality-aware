@@ -28,10 +28,20 @@ declare module 'air-quality-aware' {
         tomorrow: AirQualityCategory;
     }
 
+    type WindSpeedLayerFeature = {
+        attributes: {
+            fromdate: number;
+            todate: number;
+            force: number;
+            label: string
+        }
+    };
+
     export {
         QueryLocation,
         AirQualityCategory,
         AirQualityForecast,
         AirQualityLayerFeature,
+        WindSpeedLayerFeature
     }
 }

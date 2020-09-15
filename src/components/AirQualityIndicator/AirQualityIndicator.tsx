@@ -8,12 +8,12 @@ type Props = {
 }
 
 const ColorLookup:Record<AirQualityCategory, string> = {
-    'Good': 'rgb(0,228,0)',
-    'Moderate': 'rgb(255,255,0)',
-    'Unhealthy for Sensitive Groups': 'rgb(255,126,0)',
-    'Unhealthy': 'rgb(255,0,0)',
-    'Very Unhealthy': 'rgb(153,0,76)',
-    'Hazardous': 'rgb(76,0,38)',
+    'Good': '#00d1ae',
+    'Moderate': '#fdff80',
+    'Unhealthy for Sensitive Groups': '#ff9700',
+    'Unhealthy': '#ef495d',
+    'Very Unhealthy': '#825ca7',
+    'Hazardous': '#9b258f',
 }
 
 const AirQualityIndicator:React.FC<Props> = ({
@@ -56,9 +56,9 @@ const AirQualityIndicator:React.FC<Props> = ({
                             }}
                         >
                             <span 
-                                className='font-size--1 avenir-demi'
+                                className='font-size--1'
                                 style={{
-                                    'textShadow': '0 0 2px #333'
+                                    'textShadow': '0 0 3px #000'
                                 }}
                             >{key}</span>
                         </div>

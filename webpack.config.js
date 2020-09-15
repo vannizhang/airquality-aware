@@ -95,7 +95,7 @@ module.exports =  (env, options)=> {
                 }
             }),
             new CleanWebpackPlugin(),
-            new BundleAnalyzerPlugin()
+            // new BundleAnalyzerPlugin()
         ],
         optimization: {
             splitChunks: {
