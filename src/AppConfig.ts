@@ -9,7 +9,7 @@ const AppConfig = {
 
 export const UIConfig = {
     'sidebar-width': 415,
-    'sidebar-background': 'rgba(0,0,0,.8)'
+    'sidebar-background': 'rgba(0,116,114,.8)'
 };
 
 export default AppConfig;

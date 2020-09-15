@@ -27,7 +27,7 @@ const Sidebar:React.FC = ({
                     <span className="right icon-ui-question cursor-pointer"></span>
                 </div>
 
-                <p className="trailer-half font-size--3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <p className="trailer-half font-size--3">For community awareness within the US about air quality in your area, click on the map or search below</p>
             </div>
 
             { children }

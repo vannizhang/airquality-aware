@@ -7,6 +7,7 @@ import React, {
 import MapView from '../MapView/MapView';
 import Sidebar from '../Sidebar/Sidebar';
 import SearchWidget from '../SearchWidget/SearchWidget';
+import AirQualityIndicator from '../AirQualityIndicator/AirQualityIndicator';
 
 import AppConfig from '../../AppConfig';
 
@@ -47,9 +48,13 @@ const App = () => {
                     ref={searchWidgetContainerRef}
                     style={{
                         'width': '100%',
-                        'marginBottom': '.5rem'
+                        'marginBottom': '1rem'
                     }}
                 ></div>
+
+                <AirQualityIndicator 
+                    data={airQualityForecast}
+                />
 
             </Sidebar>
         </div>
