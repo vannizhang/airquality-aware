@@ -141,8 +141,6 @@ export default class Donut extends React.PureComponent<Props, State> {
                 const label = d3.select(this).attr('data-label');
                 const value = d3.select(this).attr('data-value');
 
-                console.log(label, value)
-
                 component.setState({
                     centerTextLabel: label,
                     centerTextValue: value + '%'

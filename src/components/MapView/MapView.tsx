@@ -52,7 +52,7 @@ const MapView:React.FC<Props> = ({
                     }  
                 }),
                 padding: {
-                    right: !isMobile ? UIConfig["sidebar-width"] : undefined
+                    right: !isMobile ? UIConfig["sidebar-width"] : 0
                 }
             });
 
