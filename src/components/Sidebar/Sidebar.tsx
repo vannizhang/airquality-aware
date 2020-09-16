@@ -2,7 +2,12 @@ import React from 'react';
 
 import { UIConfig } from '../../AppConfig';
 
-const Sidebar:React.FC = ({
+type Props = {
+    infoBtnOnClick: ()=>void;
+}
+
+const Sidebar:React.FC<Props> = ({
+    infoBtnOnClick,
     children
 }) => {
     return (
@@ -14,6 +19,7 @@ const Sidebar:React.FC = ({
                 'height': '100%',
                 'padding': '1rem',
                 'overflowY': 'auto',
+                'overflowX': 'hidden',
                 'width': UIConfig["sidebar-width"],
                 'boxSizing': 'border-box',
                 'background': UIConfig["sidebar-background"],
@@ -24,7 +30,7 @@ const Sidebar:React.FC = ({
             <div>
                 <div className="trailer-half">
                     <span className="font-size-2">Air Quality Aware</span>
-                    <span className="right icon-ui-question cursor-pointer"></span>
+                    <span className="right icon-ui-question cursor-pointer" onClick={infoBtnOnClick}></span>
                 </div>
 
                 <p className="trailer-half font-size--3">For community awareness within the US about air quality in your area, click on the map or search below</p>

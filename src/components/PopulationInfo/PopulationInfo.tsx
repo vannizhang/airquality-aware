@@ -7,6 +7,7 @@ import DonutChart, {
     DonutChartDataItem 
 } from './DonutChart';
 import Indicators from './Indicators';
+import PctBars from './PercentageBars';
 import SectionHeader from '../SectionHeader/SectionHeader';
 
 type Props = {
@@ -35,7 +36,7 @@ const PopulationInfo:React.FC<Props> = ({
                     }}
                 >
                     <Indicators 
-                        data={data.indicatorsInfo}
+                        data={data.sensitivePopulationInfo}
                     />
                 </div>
 
@@ -53,6 +54,15 @@ const PopulationInfo:React.FC<Props> = ({
                 </div>
 
             </div>
+
+            <div
+                className='leader-half'
+            >
+                <PctBars 
+                    data={data.occupationInfo}
+                />
+            </div>
+            
 
         </div>
     ) : null

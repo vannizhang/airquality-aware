@@ -1,6 +1,6 @@
-import { PopulationInfoItem } from 'air-quality-aware'
 import React from 'react'
 import { UIConfig } from '../../AppConfig';
+import { PopulationInfoItem } from 'air-quality-aware'
 
 type Props = {
     data: PopulationInfoItem[];

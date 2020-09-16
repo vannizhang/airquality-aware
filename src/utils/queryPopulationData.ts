@@ -59,7 +59,7 @@ export const queryPopulationData = async(queryLocation:QueryLocation): Promise<P
             }
         ];
 
-        const indicatorsInfo: PopulationInfoItem[] = [
+        const sensitivePopulationInfo: PopulationInfoItem[] = [
             {
                 label: 'Seniors',
                 value: feature.attributes.agedependency_senior_cy_p >= 0 ? feature.attributes.agedependency_senior_cy_p : 0,
@@ -70,13 +70,32 @@ export const queryPopulationData = async(queryLocation:QueryLocation): Promise<P
             },
             {
                 label: 'Asthmatic',
-                value: 0,
+                value: feature.attributes.healthpersonalcare_mp14088a_b_p >= 0 ? feature.attributes.healthpersonalcare_mp14088a_b_p : 0,
             },
-        ]
+        ];
+
+        const occupationInfo: PopulationInfoItem[] = [
+            {
+                label: 'Occupation: Construction',
+                value: feature.attributes.occupation_occcons_cy_p >= 0 ? feature.attributes.occupation_occcons_cy_p : 0,
+                aboveNationalAverage: feature.attributes.ConstructionFlag === 1
+            },
+            {
+                label: 'Occupation: Farm',
+                value: feature.attributes.occupation_occfarm_cy_p >= 0 ? feature.attributes.occupation_occfarm_cy_p : 0,
+                aboveNationalAverage: feature.attributes.FarmerFlag === 1
+            },
+            {
+                label: 'Occupation: Protective Service',
+                value: feature.attributes.occupation_occprot_cy_p >= 0 ? feature.attributes.occupation_occprot_cy_p : 0,
+                aboveNationalAverage: false
+            },
+        ];
 
         return {
             raceInfo,
-            indicatorsInfo
+            sensitivePopulationInfo,
+            occupationInfo
         };
 
     } catch(err){

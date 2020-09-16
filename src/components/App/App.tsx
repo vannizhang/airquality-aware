@@ -10,6 +10,7 @@ import SearchWidget from '../SearchWidget/SearchWidget';
 import AirQualityIndicator from '../AirQualityIndicator/AirQualityIndicator';
 import WindspeedChart from '../WindspeedChart/WindspeedChart';
 import PopulationInfo from '../PopulationInfo/PopulationInfo';
+import About from '../AboutModal/AboutModal';
 
 import AppConfig from '../../AppConfig';
 
@@ -38,6 +39,7 @@ const App = () => {
     const [ airQualityForecast, setAirQualityForecast ] = useState<AirQualityForecast>();
     const [ windspeedForecast, setWindspeedForecast ] = useState<WindSpeedLayerFeature[]>();
     const [ populationData, setPopulationData ] = useState<PopulationData>();
+    const [ isAboutModalOpen, setIsAboveModalOpen ] = useState<boolean>();
 
     const queryAppData = async(location:QueryLocation)=>{
         const airQualityForecastData = await queryAirQualityData(location);
@@ -51,7 +53,7 @@ const App = () => {
     }
 
     return (
-        <div>
+        <>
             <MapView 
                 webmapId={AppConfig["webmap-id"]}
                 onClickHandler={queryAppData}
@@ -62,7 +64,9 @@ const App = () => {
                 />
             </MapView>
 
-            <Sidebar>
+            <Sidebar
+                infoBtnOnClick={setIsAboveModalOpen.bind(this, true)}
+            >
 
                 <div 
                     ref={searchWidgetContainerRef}
@@ -70,6 +74,7 @@ const App = () => {
                         'width': '100%',
                         'marginBottom': '1rem'
                     }}
+                    className='search-widget-container'
                 ></div>
 
                 <AirQualityIndicator 
@@ -85,7 +90,12 @@ const App = () => {
                 />
 
             </Sidebar>
-        </div>
+
+            <About 
+                isOpen={isAboutModalOpen}
+                onCloseHandler={setIsAboveModalOpen.bind(this, false)}
+            />
+        </>
     )
 }
 
