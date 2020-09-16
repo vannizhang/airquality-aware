@@ -7,10 +7,12 @@ import { AppContext } from '../../contexts/AppContextProvider';
 import { UIConfig } from '../../AppConfig';
 
 type Props = {
+    isLoading: boolean;
     infoBtnOnClick: ()=>void;
 }
 
 const Sidebar:React.FC<Props> = ({
+    isLoading,
     infoBtnOnClick,
     children
 }) => {

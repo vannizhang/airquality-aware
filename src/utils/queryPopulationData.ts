@@ -85,12 +85,12 @@ export const queryPopulationData = async(queryLocation:QueryLocation): Promise<P
                 aboveNationalAverage: feature.attributes.Enrich4_Stripped_ConstructionFl === 1
             },
             {
-                label: 'Occupation: Farm',
+                label: 'Occupation: Farm, Fishing, Forestry',
                 value: feature.attributes.Enrich4_Stripped_occupation_o_1 >= 0 ? feature.attributes.Enrich4_Stripped_occupation_o_1 : 0,
                 aboveNationalAverage: feature.attributes.Enrich4_Stripped_FarmerFlag === 1
             },
             {
-                label: 'Occupation: Protective Service',
+                label: 'Occupation: Protective Services',
                 value: feature.attributes.Enrich4_Stripped_occupation_o_2 >= 0 ? feature.attributes.Enrich4_Stripped_occupation_o_2 : 0,
                 aboveNationalAverage: feature.attributes.Enrich4_Stripped_ProtectiveFlag === 1 
             },

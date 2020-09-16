@@ -40,16 +40,30 @@ const App = () => {
     const [ windspeedForecast, setWindspeedForecast ] = useState<WindSpeedLayerFeature[]>();
     const [ populationData, setPopulationData ] = useState<PopulationData>();
     const [ isAboutModalOpen, setIsAboveModalOpen ] = useState<boolean>();
+    const [ isLoading, setIsLoading ] = useState<boolean>(false);
 
     const queryAppData = async(location:QueryLocation)=>{
-        const airQualityForecastData = await queryAirQualityData(location);
-        setAirQualityForecast(airQualityForecastData);
 
-        const windSpeedData = await queryWindSpeedData(location);
-        setWindspeedForecast(windSpeedData);
+        setAirQualityForecast(undefined);
+        setWindspeedForecast(undefined);
+        setPopulationData(undefined);
 
-        const populationData = await queryPopulationData(location);
-        setPopulationData(populationData);
+        setIsLoading(true);
+
+        try {
+            const airQualityForecastData = await queryAirQualityData(location);
+            const windSpeedData = await queryWindSpeedData(location);
+            const populationData = await queryPopulationData(location);
+
+            setIsLoading(false);
+            setAirQualityForecast(airQualityForecastData);
+            setWindspeedForecast(windSpeedData);
+            setPopulationData(populationData);
+
+        } catch(err){
+            setIsLoading(false);
+            console.log(err);
+        }
     }
 
     return (
@@ -66,6 +80,7 @@ const App = () => {
 
             <Sidebar
                 infoBtnOnClick={setIsAboveModalOpen.bind(this, true)}
+                isLoading={isLoading}
             >
 
                 <div 
@@ -88,6 +103,15 @@ const App = () => {
                 <PopulationInfo 
                     data={populationData}
                 />
+
+                {
+                    isLoading ? (
+                        <div className="loader is-active padding-leader-3 padding-trailer-3">
+                            <div className="loader-bars"></div>
+                            <div className="loader-text">Loading...</div>
+                        </div>
+                    ) : null
+                }
 
             </Sidebar>
 

@@ -14,8 +14,8 @@ const Indicators:React.FC<Props> = ({
 
         return data.map(d=>{
             return (
-                <div key={d.label} className='text-center trailer-half'>
-                    <span className='font-size-2'
+                <div key={d.label} className='text-center trailer-quarter'>
+                    <span className='font-size-1'
                         style={{
                             'color': UIConfig["indicator-label-color"]
                         }}
@@ -23,7 +23,7 @@ const Indicators:React.FC<Props> = ({
                     <br/>
                     <span className='font-size--1'
                         style={{
-                            'color': UIConfig["indicator-label-color"]
+                            'color': '#40C4ED'
                         }}
                     >{d.label}</span>
                 </div>
@@ -32,7 +32,7 @@ const Indicators:React.FC<Props> = ({
     };
 
     return (
-        <div>
+        <div className='leader-quarter'>
             { getIndicators() }
         </div>
     )

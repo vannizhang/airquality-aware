@@ -36,17 +36,18 @@ const PercentageBars:React.FC<Props> = ({
                 >
                     <div
                         style={{
-                            // 'width': '30px',
-                            'height': '20px',
+                            'width': '18px',
+                            'height': '15px',
                             'backgroundColor': d.color,
                             'marginRight': '5px',
-                            'flexGrow': 1
+                            
                         }}
                     ></div>
 
                     <div
                         style={{
-                            'marginRight': '.5rem'
+                            'marginRight': '.5rem',
+                            'flexGrow': 1
                         }}
                     >
                         <span className='font-size--3'>{d.label}</span>
@@ -107,7 +108,7 @@ const PercentageBars:React.FC<Props> = ({
     }
 
     return (
-        <div>
+        <div className='leader-1'>
             { getPctBars() }
             { getLegends() }
         </div>

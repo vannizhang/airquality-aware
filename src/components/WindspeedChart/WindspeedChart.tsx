@@ -1,9 +1,10 @@
 import './style.scss';
 import React from 'react';
 import * as d3 from 'd3';
-import { mouse } from 'd3';
 import { WindSpeedLayerFeature } from 'air-quality-aware';
 import SectionHeader from '../SectionHeader/SectionHeader';
+import { format } from 'date-fns';
+import { UIConfig } from '../../AppConfig';
 
 type WindChartProps = {
     data: WindSpeedLayerFeature[]
@@ -139,7 +140,7 @@ const LineChart:React.FC<LinChartProps> = ({
             })
             .on("mousemove", function(){
                 if(tooltipTemplate || onHover){
-                    const mousePosX = mouse(this)[0];
+                    const mousePosX = d3.mouse(this)[0];
                     // console.log(mousePosX);
                     const itemOnHover = getItemByMousePos(mousePosX);
     
@@ -342,9 +343,11 @@ const LineChart:React.FC<LinChartProps> = ({
             const top = -(tooltipDivHeight - margin.top);
             const xPosForItemOnHover = scales.x(itemOnHover.key) + margin.left;
     
-            const left = ( xPosForItemOnHover + tooltipDivWidth ) >= (containerWidth - margin.left) 
-                ? (containerWidth - tooltipDivWidth - margin.right) 
-                : xPosForItemOnHover;
+            let left = xPosForItemOnHover + tooltipDivWidth / 2 >= width + margin.left
+                    ? xPosForItemOnHover - tooltipDivWidth
+                    : xPosForItemOnHover - tooltipDivWidth / 2;
+
+            left = left >= margin.left ? left : margin.left;
     
             setTooltipPosition({ top, left });
         }
@@ -371,15 +374,17 @@ const LineChart:React.FC<LinChartProps> = ({
                     position: 'absolute',
                     top: tooltipPosition.top,
                     left: tooltipPosition.left,
-                    background: 'rgba(0,0,0,.85)',
-                    color: '#fff',
-                    padding: '.35rem',
-                    pointerEvents: 'none'
+                    background: 'rgba(0,0,0,.3)',
+                    color: UIConfig["text-color"],
+                    padding: '.25rem',
+                    pointerEvents: 'none',
+                    fontSize: '.8rem'
                 }}
                 dangerouslySetInnerHTML={{
                     __html: tooltipContent
                 }}
-            ></div>
+            >
+            </div>
         );
     };
 
@@ -462,9 +467,12 @@ const WindspeedChart:React.FC<WindChartProps> = ({
 
     const formatData = ()=>{
         return data.map(d=>{
+            const fromDate = format(new Date(d.attributes.fromdate), 'iii haaa');
+
             return {
                 key: d.attributes.fromdate,
-                value: d.attributes.force
+                value: d.attributes.force,
+                label: `${fromDate}: ${WindspeedLookup[+d.attributes.force]}`
             }
         })
     };
@@ -489,7 +497,8 @@ const WindspeedChart:React.FC<WindChartProps> = ({
                     data={formatData()}
                     shouldHideDots={true}
                     timeFormatSpecifier='%a %I%p'
-                    strokeColor='#efefef'
+                    strokeColor='#40C4ED'
+                    tooltipTemplate={'{label}'}
                 />
             </div>
 
