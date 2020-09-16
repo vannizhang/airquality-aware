@@ -10,7 +10,8 @@ const AppConfig = {
 
 export const UIConfig = {
     'sidebar-width': 415,
-    'sidebar-background': 'rgba(0,116,114,.8)'
+    'sidebar-background': 'rgba(47,61,94,.8)',
+    'text-color': '#E2E2E2'
 };
 
 export default AppConfig;

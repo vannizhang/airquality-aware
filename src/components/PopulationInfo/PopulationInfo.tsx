@@ -31,8 +31,8 @@ const PopulationInfo = () => {
             <div
                 style={{
                     // margin: '3rem',
-                    width: '150px',
-                    height: '150px',
+                    width: '160px',
+                    height: '160px',
                     border: '1px solid rgba(200,200,200,.3)',
                 }}
             >

@@ -118,8 +118,18 @@ export default class Donut extends React.PureComponent<Props, State> {
 
         arcs.append('path')
             .attr('d', arc)
+            .attr('data-label', (d: any, i: number) => {
+                return d.data.label;
+            })
             .attr('fill', (d: any, i: number) => {
                 return d.data.color || ColorRamp[i];
+            })
+            .on("mouseover", function(d){
+                const label = d3.select(this).attr('data-label');
+                arcGroup.select('.center-text').text(label);
+            })
+            .on("mouseout", (d)=>{
+                arcGroup.select('.center-text').text('');
             });
 
         arcGroup.append("text")
@@ -127,7 +137,7 @@ export default class Donut extends React.PureComponent<Props, State> {
             .attr("text-anchor", "middle")
                 .attr('font-size', '.9rem')
                 .attr('y', 7)
-            .text(`${data[0].label}`)
+            // .text(`${data[0].label}`)
             .style('fill', 'rgba(255,255,255,.8)');
     }
 

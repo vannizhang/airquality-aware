@@ -17,7 +17,7 @@ const Sidebar:React.FC = ({
                 'width': UIConfig["sidebar-width"],
                 'boxSizing': 'border-box',
                 'background': UIConfig["sidebar-background"],
-                'color': '#fff',
+                'color': UIConfig["text-color"],
                 'zIndex': 5
             }}
         >
