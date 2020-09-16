@@ -1,9 +1,13 @@
 
 import React from 'react';
-import SectionHeader from '../SectionHeader/SectionHeader';
 
-import DonutChart, { DonutChartDataItem } from './DonutChart';
 import { PopulationData, PopulationInfoItem } from 'air-quality-aware';
+
+import DonutChart, { 
+    DonutChartDataItem 
+} from './DonutChart';
+import Indicators from './Indicators';
+import SectionHeader from '../SectionHeader/SectionHeader';
 
 type Props = {
     data: PopulationData
@@ -21,16 +25,35 @@ const PopulationInfo:React.FC<Props> = ({
 
             <div
                 style={{
-                    // margin: '3rem',
-                    width: '140px',
-                    height: '140px',
-                    // border: '1px solid rgba(200,200,200,.3)',
+                    'display': 'flex',
+                    'justifyContent': 'center'
                 }}
             >
-                <DonutChart 
-                    data={data.raceInfo}
-                />
+                <div
+                    style={{
+                        marginRight: '3rem'
+                    }}
+                >
+                    <Indicators 
+                        data={data.indicatorsInfo}
+                    />
+                </div>
+
+                <div
+                    style={{
+                        // margin: '3rem',
+                        width: '180px',
+                        height: '180px',
+                        // border: '1px solid rgba(200,200,200,.3)',
+                    }}
+                >
+                    <DonutChart 
+                        data={data.raceInfo}
+                    />
+                </div>
+
             </div>
+
         </div>
     ) : null
 }

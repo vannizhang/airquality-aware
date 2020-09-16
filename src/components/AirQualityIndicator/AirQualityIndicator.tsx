@@ -10,8 +10,8 @@ type Props = {
 
 const ColorLookup:Record<AirQualityCategory, string> = {
     'Good': '#00d1ae',
-    'Moderate': '#fdff80',
-    'Unhealthy for Sensitive Groups': '#ff9700',
+    'Moderate': '#cac847',
+    'Unhealthy for Sensitive Groups': '#d59537',
     'Unhealthy': '#ef495d',
     'Very Unhealthy': '#825ca7',
     'Hazardous': '#9b258f',

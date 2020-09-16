@@ -59,8 +59,24 @@ export const queryPopulationData = async(queryLocation:QueryLocation): Promise<P
             }
         ];
 
+        const indicatorsInfo: PopulationInfoItem[] = [
+            {
+                label: 'Seniors',
+                value: feature.attributes.agedependency_senior_cy_p >= 0 ? feature.attributes.agedependency_senior_cy_p : 0,
+            },
+            {
+                label: 'School Age',
+                value: feature.attributes.SchoolAgePercent >= 0 ? feature.attributes.SchoolAgePercent : 0,
+            },
+            {
+                label: 'Asthmatic',
+                value: 0,
+            },
+        ]
+
         return {
-            raceInfo
+            raceInfo,
+            indicatorsInfo
         };
 
     } catch(err){

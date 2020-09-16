@@ -72,7 +72,8 @@ declare module 'air-quality-aware' {
             label: string;
             value: number;
             color?: string;
-        }[]
+        }[],
+        indicatorsInfo: PopulationInfoItem[]
     }
 
     export {

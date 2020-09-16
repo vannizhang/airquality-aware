@@ -13,7 +13,9 @@ const AppConfig = {
 export const UIConfig = {
     'sidebar-width': 415,
     'sidebar-background': 'rgba(47,61,94,.8)',
-    'text-color': '#E2E2E2'
+    'text-color': '#E2E2E2',
+    'indicator-label-color': '#E2E2E2',
+    'indicator-value-color': '#F96D48',
 };
 
 export default AppConfig;
