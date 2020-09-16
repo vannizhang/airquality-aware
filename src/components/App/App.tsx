@@ -9,6 +9,7 @@ import Sidebar from '../Sidebar/Sidebar';
 import SearchWidget from '../SearchWidget/SearchWidget';
 import AirQualityIndicator from '../AirQualityIndicator/AirQualityIndicator';
 import WindspeedChart from '../WindspeedChart/WindspeedChart';
+import PopulationInfo from '../PopulationInfo/PopulationInfo';
 
 import AppConfig from '../../AppConfig';
 
@@ -69,6 +70,8 @@ const App = () => {
                 <WindspeedChart 
                     data={windspeedForecast}
                 />
+
+                <PopulationInfo />
 
             </Sidebar>
         </div>

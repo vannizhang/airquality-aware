@@ -3,6 +3,7 @@ import React from 'react';
 import * as d3 from 'd3';
 import { mouse } from 'd3';
 import { WindSpeedLayerFeature } from 'air-quality-aware';
+import SectionHeader from '../SectionHeader/SectionHeader';
 
 type WindChartProps = {
     data: WindSpeedLayerFeature[]
@@ -54,7 +55,7 @@ const WindspeedLookup = [
 const LineChart:React.FC<LinChartProps> = ({
     data = [],
     margin = {
-        top: 20, 
+        top: 5, 
         right: 20, 
         bottom: 30, 
         left: 40
@@ -471,20 +472,27 @@ const WindspeedChart:React.FC<WindChartProps> = ({
     return data && data.length ? (
         <div className='leader-1 trailer-half'
             style={{
-                width: '100%',
-                height: '150px',
+                width: '100%'
             }}
         >
-            <div className='text-center'>
-                <span className='font-size-2 avenir-light'>Wind Speed</span>
+            <SectionHeader 
+                text='Wind Speed'
+            />
+
+            <div
+                style={{
+                    width: '100%',
+                    height: '150px',
+                }}
+            >
+                <LineChart 
+                    data={formatData()}
+                    shouldHideDots={true}
+                    timeFormatSpecifier='%a %I%p'
+                    strokeColor='#efefef'
+                />
             </div>
 
-            <LineChart 
-                data={formatData()}
-                shouldHideDots={true}
-                timeFormatSpecifier='%a %I%p'
-                strokeColor='#efefef'
-            />
         </div>
     ) : null;
 }

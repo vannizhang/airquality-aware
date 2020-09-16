@@ -1,7 +1,8 @@
 
 import React from 'react';
 
-import { AirQualityForecast, AirQualityCategory } from 'air-quality-aware'
+import { AirQualityForecast, AirQualityCategory } from 'air-quality-aware';
+import SectionHeader from '../SectionHeader/SectionHeader';
 
 type Props = {
     data: AirQualityForecast
@@ -58,14 +59,18 @@ const AirQualityIndicator:React.FC<Props> = ({
                             <span 
                                 className='font-size--1'
                                 style={{
-                                    'textShadow': '0 0 3px #000'
+                                    'textShadow': '0 0 3px #000',
+                                    'color': '#fff'
                                 }}
                             >{key}</span>
                         </div>
                     </div>
 
-                    <div className='text-center leader-quarter'>
-                        <span className='font-size--3'>{catgeory}</span>
+                    <div className='text-center leader-half' style={{
+                        'lineHeight': '1.25rem',
+                        'fontSize': '14px'
+                    }}>
+                        <span>{catgeory}</span>
                     </div>
                 </div>
 
@@ -77,9 +82,9 @@ const AirQualityIndicator:React.FC<Props> = ({
 
     return data ? (
         <div>
-            <div className='text-center trailer-half'>
-                <span className='font-size-2 avenir-light'>Air Quality Index</span>
-            </div>
+            <SectionHeader 
+                text='Air Quality Index'
+            />
 
             <div
                 style={{
@@ -89,7 +94,6 @@ const AirQualityIndicator:React.FC<Props> = ({
             >
                 { getIndicators() }
             </div>
-
         </div>
 
     ) : null;
