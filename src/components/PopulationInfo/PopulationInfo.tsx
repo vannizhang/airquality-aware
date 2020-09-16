@@ -9,6 +9,7 @@ import DonutChart, {
 import Indicators from './Indicators';
 import PctBars from './PercentageBars';
 import SectionHeader from '../SectionHeader/SectionHeader';
+import { UIConfig } from '../../AppConfig';
 
 type Props = {
     data: PopulationData
@@ -50,6 +51,7 @@ const PopulationInfo:React.FC<Props> = ({
                 >
                     <DonutChart 
                         data={data.raceInfo}
+                        totalPopulation={data.totalPopulation}
                     />
                 </div>
 
@@ -63,7 +65,6 @@ const PopulationInfo:React.FC<Props> = ({
                 />
             </div>
             
-
         </div>
     ) : null
 }

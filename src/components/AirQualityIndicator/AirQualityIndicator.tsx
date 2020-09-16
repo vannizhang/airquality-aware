@@ -9,12 +9,12 @@ type Props = {
 }
 
 const ColorLookup:Record<AirQualityCategory, string> = {
-    'Good': '#00d1ae',
-    'Moderate': '#cac847',
-    'Unhealthy for Sensitive Groups': '#d59537',
-    'Unhealthy': '#ef495d',
-    'Very Unhealthy': '#825ca7',
-    'Hazardous': '#9b258f',
+    'Good': '#0ca98c',
+    'Moderate': '#b8b774',
+    'Unhealthy for Sensitive Groups': '#d3982d',
+    'Unhealthy': '#bd565d',
+    'Very Unhealthy': '#7d5a9f',
+    'Hazardous': '#942789',
 }
 
 const AirQualityIndicator:React.FC<Props> = ({

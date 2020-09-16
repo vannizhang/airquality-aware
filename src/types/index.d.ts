@@ -52,6 +52,7 @@ declare module 'air-quality-aware' {
             Enrich4_Stripped_occupation_occ: number; 
             // 2020 Occupation: Protective Service: Percent
             Enrich4_Stripped_occupation_o_2: number; 
+            RacePercent_B03002_001E: number;
             RacePercent_AsianPacIslander: number; 
             RacePercent_B03002_calc_pctHisp: number; 
             RacePercent_B03002_calc_pctBlac: number; 
@@ -73,7 +74,8 @@ declare module 'air-quality-aware' {
             color?: string;
         }[],
         sensitivePopulationInfo: PopulationInfoItem[],
-        occupationInfo: PopulationInfoItem[]
+        occupationInfo: PopulationInfoItem[],
+        totalPopulation: number;
     }
 
     export {

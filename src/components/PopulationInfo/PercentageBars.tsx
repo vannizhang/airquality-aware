@@ -6,9 +6,68 @@ type Props = {
     data: PopulationInfoItem[];
 }
 
+const LegendData = [
+    {
+        label: 'Above National Average',
+        color: UIConfig["above-national-ave"]
+    },
+    {
+        label: 'Below National Average',
+        color: UIConfig["below-national-ave"]
+    }
+]
+
 const PercentageBars:React.FC<Props> = ({
     data
 }) => {
+
+    const getLegends = ()=>{
+        const legends = LegendData.map(d=>{
+
+            return (
+                <div
+                    key={d.label}
+                    style={{
+                        'display': 'flex',
+                        'flexGrow': 1,
+                        'alignItems': 'center',
+                        // 'marginRight': '.25rem'
+                    }}
+                >
+                    <div
+                        style={{
+                            // 'width': '30px',
+                            'height': '20px',
+                            'backgroundColor': d.color,
+                            'marginRight': '5px',
+                            'flexGrow': 1
+                        }}
+                    ></div>
+
+                    <div
+                        style={{
+                            'marginRight': '.5rem'
+                        }}
+                    >
+                        <span className='font-size--3'>{d.label}</span>
+                    </div>
+                </div>
+
+            )
+        });
+
+        return (
+            <div 
+                className='leader-half'
+                style={{
+                    'display': 'flex',
+                    // justifyContent: 'space-between'
+                }}
+            >
+                { legends }
+            </div>
+        )
+    }
 
     const getPctBars = ()=>{
         return data.map(d=>{
@@ -28,7 +87,7 @@ const PercentageBars:React.FC<Props> = ({
                             'position': 'relative',
                             'width': '100%',
                             'height': '25px',
-                            'background': '#CECCCC'
+                            'background': '#303B4C'
                         }}
                     >
                         <div
@@ -50,6 +109,7 @@ const PercentageBars:React.FC<Props> = ({
     return (
         <div>
             { getPctBars() }
+            { getLegends() }
         </div>
     )
 }

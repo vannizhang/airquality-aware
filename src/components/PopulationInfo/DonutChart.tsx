@@ -1,5 +1,6 @@
 import React from 'react';
 import * as d3 from 'd3';
+import { numberFns } from 'helper-toolkit-ts';
 
 export interface DonutChartDataItem {
     label: string;
@@ -12,11 +13,16 @@ interface Props {
     thicknessRatio?: number;
     // set true to create the donut chart looks like a gauge
     isHalfDonut?: boolean;
+    totalPopulation?: number;
 }
 
 interface State {
     radius: number;
+    centerTextLabel: string;
+    centerTextValue: string;
 }
+
+const DefaultLabelForCenterText = 'Total Population';
 
 export default class Donut extends React.PureComponent<Props, State> {
     // use 0 as the thicknessRatio to create a pei chart. If thicknessRatio is greater than 0 and smaller than 1, it will create a donut chart
@@ -33,6 +39,8 @@ export default class Donut extends React.PureComponent<Props, State> {
 
         this.state = {
             radius: 0,
+            centerTextLabel: DefaultLabelForCenterText,
+            centerTextValue: numberFns.numberWithCommas(props.totalPopulation),
         };
     }
 
@@ -73,6 +81,8 @@ export default class Donut extends React.PureComponent<Props, State> {
     }
 
     draw(): void {
+        const component = this;
+
         const {
             ClassName4ArcGroup,
             ClassName4Arc,
@@ -130,29 +140,36 @@ export default class Donut extends React.PureComponent<Props, State> {
             .on("mouseover", function(d){
                 const label = d3.select(this).attr('data-label');
                 const value = d3.select(this).attr('data-value');
-                arcGroup.select('.center-text-label').text(label);
-                arcGroup.select('.center-text-value').text(value + '%');
+
+                console.log(label, value)
+
+                component.setState({
+                    centerTextLabel: label,
+                    centerTextValue: value + '%'
+                })
             })
             .on("mouseout", (d)=>{
-                arcGroup.select('.center-text-label').text('');
-                arcGroup.select('.center-text-value').text('');
+                component.setState({
+                    centerTextLabel: DefaultLabelForCenterText,
+                    centerTextValue: numberFns.numberWithCommas(component.props.totalPopulation)
+                })
             });
 
-        arcGroup.append("text")
-            .attr("class", "center-text-label")
-            .attr("text-anchor", "middle")
-                .attr('font-size', '.9rem')
-                .attr('y', -5)
-            // .text(`${data[0].label}`)
-            .style('fill', 'rgba(255,255,255,.8)');
+        // arcGroup.append("text")
+        //     .attr("class", "center-text-label")
+        //     .attr("text-anchor", "middle")
+        //         .attr('font-size', '.9rem')
+        //         .attr('y', -5)
+        //     .text(DefaultLabelForCenterText)
+        //     .style('fill', 'rgba(255,255,255,.8)');
 
-        arcGroup.append("text")
-            .attr("class", "center-text-value")
-            .attr("text-anchor", "middle")
-                .attr('font-size', '.9rem')
-                .attr('y', 15)
-            // .text(`${data[0].label}`)
-            .style('fill', 'rgba(255,255,255,.8)');
+        // arcGroup.append("text")
+        //     .attr("class", "center-text-value")
+        //     .attr("text-anchor", "middle")
+        //         .attr('font-size', '.9rem')
+        //         .attr('y', 15)
+        //     .text(numberFns.numberWithCommas(this.props.totalPopulation))
+        //     .style('fill', 'rgba(255,255,255,.8)');
     }
 
     // conponentDidUpdate(prevProps: Props): void {
@@ -178,8 +195,28 @@ export default class Donut extends React.PureComponent<Props, State> {
                 style={{
                     width: '100%',
                     height: '100%',
+                    position: 'relative'
                 }}
-            ></div>
+            >
+                <div style={{
+                    'position': 'absolute',
+                    'top': 0,
+                    'left': 0,
+                    'width': '100%',
+                    'height': '100%',
+                    'display': 'flex',
+                    'justifyContent': 'center',
+                    'alignItems': 'center',
+                    'pointerEvents': 'none',
+                }}>
+                    <div className='text-center font-size--3'>
+                        <span>{this.state.centerTextLabel}</span>
+                        <br/>
+                        <span>{this.state.centerTextValue}</span>
+                    </div>
+                </div>
+                
+            </div>
         );
     }
 }

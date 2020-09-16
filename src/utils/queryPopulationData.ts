@@ -31,31 +31,35 @@ export const queryPopulationData = async(queryLocation:QueryLocation): Promise<P
         const feature:PopulationInfoFeature = res?.data?.features?.[0]
         console.log(feature);
 
+        if(!feature){
+            return undefined;
+        }
+
         const raceInfo: DonutChartDataItem[] = [
             {
                 label: 'Asian',
                 value: feature.attributes.RacePercent_AsianPacIslander >= 0 ? feature.attributes.RacePercent_AsianPacIslander : 0,
-                color: '#FAB58D'
+                color: '#1253D6'
             },
             {
                 label: 'Black',
                 value: feature.attributes.RacePercent_B03002_calc_pctBlac >= 0 ? feature.attributes.RacePercent_B03002_calc_pctBlac : 0,
-                color: '#F89C6C'
+                color: '#1D6FDC'
             },
             {
                 label: 'Hispanic',
                 value: feature.attributes.RacePercent_B03002_calc_pctHisp >= 0 ? feature.attributes.RacePercent_B03002_calc_pctHisp : 0,
-                color: '#F5854C'
+                color: '#298BE2'
             },
             {
                 label: 'Other',
                 value: feature.attributes.RacePercent_OtherRace >= 0 ? feature.attributes.RacePercent_OtherRace : 0,
-                color: '#F26930'
+                color: '#35A8E7'
             },
             {
                 label: 'White',
                 value: feature.attributes.RacePercent_B03002_calc_pctNHWh >= 0 ? feature.attributes.RacePercent_B03002_calc_pctNHWh : 0,
-                color: '#E64F25'
+                color: '#40C4ED'
             }
         ];
 
@@ -92,10 +96,13 @@ export const queryPopulationData = async(queryLocation:QueryLocation): Promise<P
             },
         ];
 
+        const totalPopulation = feature.attributes.RacePercent_B03002_001E;
+
         return {
             raceInfo,
             sensitivePopulationInfo,
-            occupationInfo
+            occupationInfo,
+            totalPopulation
         };
 
     } catch(err){

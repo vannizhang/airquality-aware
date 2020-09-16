@@ -16,8 +16,8 @@ export const UIConfig = {
     'text-color': '#E2E2E2',
     'indicator-label-color': '#E2E2E2',
     'indicator-value-color': '#F96D48',
-    'above-national-ave': '#F26930',
-    'below-national-ave': '#FAB58D'
+    'above-national-ave': '#75C7E9',
+    'below-national-ave': '#0878BD'
 };
 
 export default AppConfig;
