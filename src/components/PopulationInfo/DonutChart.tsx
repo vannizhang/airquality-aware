@@ -155,12 +155,16 @@ export default class Donut extends React.PureComponent<Props, State> {
             .style('fill', 'rgba(255,255,255,.8)');
     }
 
-    conponentDidUpdate(prevProps: Props): void {
-        // console.log('donut chart did update')
-        if (prevProps.data !== this.props.data) {
-            console.log(prevProps.data, this.props.data)
-            this.draw();
-        }
+    // conponentDidUpdate(prevProps: Props): void {
+    //     console.log('donut chart did update')
+    //     if (prevProps.data !== this.props.data) {
+    //         console.log(prevProps.data, this.props.data)
+    //         this.draw();
+    //     }
+    // }
+
+    componentWillUpdate(){
+        this.draw();
     }
 
     componentDidMount(): void {
