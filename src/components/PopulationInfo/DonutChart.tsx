@@ -21,7 +21,7 @@ interface State {
 export default class Donut extends React.PureComponent<Props, State> {
     // use 0 as the thicknessRatio to create a pei chart. If thicknessRatio is greater than 0 and smaller than 1, it will create a donut chart
     // the value of thicknessRatio should between 0 and 1
-    private readonly DefaultThicknessRatio = 0.6;
+    private readonly DefaultThicknessRatio = 0.75;
     private readonly ClassName4ArcGroup = 'arc-group';
     private readonly ClassName4Arc = 'arc';
     private readonly ColorRamp = d3.schemeSet2;
@@ -121,28 +121,44 @@ export default class Donut extends React.PureComponent<Props, State> {
             .attr('data-label', (d: any, i: number) => {
                 return d.data.label;
             })
+            .attr('data-value', (d: any, i: number) => {
+                return d.data.value;
+            })
             .attr('fill', (d: any, i: number) => {
                 return d.data.color || ColorRamp[i];
             })
             .on("mouseover", function(d){
                 const label = d3.select(this).attr('data-label');
-                arcGroup.select('.center-text').text(label);
+                const value = d3.select(this).attr('data-value');
+                arcGroup.select('.center-text-label').text(label);
+                arcGroup.select('.center-text-value').text(value + '%');
             })
             .on("mouseout", (d)=>{
-                arcGroup.select('.center-text').text('');
+                arcGroup.select('.center-text-label').text('');
+                arcGroup.select('.center-text-value').text('');
             });
 
         arcGroup.append("text")
-            .attr("class", "center-text")
+            .attr("class", "center-text-label")
             .attr("text-anchor", "middle")
                 .attr('font-size', '.9rem')
-                .attr('y', 7)
+                .attr('y', -5)
+            // .text(`${data[0].label}`)
+            .style('fill', 'rgba(255,255,255,.8)');
+
+        arcGroup.append("text")
+            .attr("class", "center-text-value")
+            .attr("text-anchor", "middle")
+                .attr('font-size', '.9rem')
+                .attr('y', 15)
             // .text(`${data[0].label}`)
             .style('fill', 'rgba(255,255,255,.8)');
     }
 
     conponentDidUpdate(prevProps: Props): void {
+        // console.log('donut chart did update')
         if (prevProps.data !== this.props.data) {
+            console.log(prevProps.data, this.props.data)
             this.draw();
         }
     }

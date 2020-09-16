@@ -37,11 +37,52 @@ declare module 'air-quality-aware' {
         }
     };
 
+    type PopulationInfoFeature = {
+        attributes: {
+            AirCleanerFlag: number; 
+            AsianPacificIslanderPercent: number; 
+            AsthmaFlag: number; 
+            COUNTY: string; 
+            ConstructionFlag: number; 
+            FIPS: string; 
+            FarmerFlag: number; 
+            OtherRacePercent: number; 
+            STATE: string; 
+            SchoolAgePercent: number; 
+            agedependency_senior_cy_p: number; 
+            healthpersonalcare_mp14088a_b_p: number; 
+            occupation_occcons_cy_p: number; 
+            occupation_occfarm_cy_p: number; 
+            occupation_occprot_cy_p: number; 
+            populationtotals_totpop_cy: number; 
+            raceandhispanicorigin_hisppop_c: number; 
+            raceandhispanicorigin_nhspblk_c: number; 
+            raceandhispanicorigin_nhspwht_c: number; 
+        }
+    }
+
+    type PopulationInfoItem = {
+        label: string;
+        value: number;
+        aboveNationalAverage?: boolean;
+    }
+
+    type PopulationData = {
+        raceInfo: {
+            label: string;
+            value: number;
+            color?: string;
+        }[]
+    }
+
     export {
         QueryLocation,
         AirQualityCategory,
         AirQualityForecast,
         AirQualityLayerFeature,
-        WindSpeedLayerFeature
+        WindSpeedLayerFeature,
+        PopulationInfoFeature,
+        PopulationInfoItem,
+        PopulationData
     }
 }

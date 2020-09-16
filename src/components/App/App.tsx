@@ -16,7 +16,8 @@ import AppConfig from '../../AppConfig';
 import {
     QueryLocation,
     AirQualityForecast,
-    WindSpeedLayerFeature
+    WindSpeedLayerFeature,
+    PopulationData
 } from 'air-quality-aware';
 
 import {
@@ -27,11 +28,16 @@ import {
     queryWindSpeedData
 } from '../../utils/queryWindSpeedData';
 
+import {
+    queryPopulationData
+} from '../../utils/queryPopulationData';
+
 const App = () => {
 
     const searchWidgetContainerRef = useRef<HTMLDivElement>();
     const [ airQualityForecast, setAirQualityForecast ] = useState<AirQualityForecast>();
-    const [ windspeedForecast, setWindspeedForecast ] = useState<WindSpeedLayerFeature[]>()
+    const [ windspeedForecast, setWindspeedForecast ] = useState<WindSpeedLayerFeature[]>();
+    const [ populationData, setPopulationData ] = useState<PopulationData>();
 
     const queryAppData = async(location:QueryLocation)=>{
         const airQualityForecastData = await queryAirQualityData(location);
@@ -39,6 +45,9 @@ const App = () => {
 
         const windSpeedData = await queryWindSpeedData(location);
         setWindspeedForecast(windSpeedData);
+
+        const populationData = await queryPopulationData(location);
+        setPopulationData(populationData);
     }
 
     return (
@@ -71,7 +80,9 @@ const App = () => {
                     data={windspeedForecast}
                 />
 
-                <PopulationInfo />
+                <PopulationInfo 
+                    data={populationData}
+                />
 
             </Sidebar>
         </div>

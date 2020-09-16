@@ -20,12 +20,12 @@ export const queryWindSpeedData = async(queryLocation:QueryLocation):Promise<Win
         orderByFields: 'fromdate' 
     }
 
-    const resCurrent = await axios(`${serviceUrl}/query`, { params });
+    const res = await axios(`${serviceUrl}/query`, { params });
 
-    const features:WindSpeedLayerFeature[] = resCurrent.data && resCurrent.data.features && resCurrent.data.features.length
-        ? resCurrent.data.features
+    const features:WindSpeedLayerFeature[] = res.data && res.data.features && res.data.features.length
+        ? res.data.features
         : undefined;
-    console.log(features);
+    // console.log(features);
 
     return features;
 }

@@ -1,28 +1,19 @@
+
 import React from 'react';
 import SectionHeader from '../SectionHeader/SectionHeader';
 
-import DonutChart from './DonutChart';
+import DonutChart, { DonutChartDataItem } from './DonutChart';
+import { PopulationData, PopulationInfoItem } from 'air-quality-aware';
 
-const PopulationInfo = () => {
+type Props = {
+    data: PopulationData
+}
 
-    const getDataForDonutChart = ()=>{
-        return [
-            {
-                label: 'A',
-                value: 20,
-            },
-            {
-                label: 'B',
-                value: 40,
-            },
-            {
-                label: 'C',
-                value: 35,
-            },
-        ]
-    }
+const PopulationInfo:React.FC<Props> = ({
+    data
+}:Props) => {
 
-    return (
+    return data ? (
         <div>
             <SectionHeader 
                 text='Popluation'
@@ -31,17 +22,17 @@ const PopulationInfo = () => {
             <div
                 style={{
                     // margin: '3rem',
-                    width: '160px',
-                    height: '160px',
-                    border: '1px solid rgba(200,200,200,.3)',
+                    width: '140px',
+                    height: '140px',
+                    // border: '1px solid rgba(200,200,200,.3)',
                 }}
             >
                 <DonutChart 
-                    data={getDataForDonutChart()}
+                    data={data.raceInfo}
                 />
             </div>
         </div>
-    )
+    ) : null
 }
 
 export default PopulationInfo
