@@ -39,25 +39,24 @@ declare module 'air-quality-aware' {
 
     type PopulationInfoFeature = {
         attributes: {
-            AirCleanerFlag: number; 
-            AsianPacificIslanderPercent: number; 
-            AsthmaFlag: number; 
-            COUNTY: string; 
-            ConstructionFlag: number; 
-            FIPS: string; 
-            FarmerFlag: number; 
-            OtherRacePercent: number; 
-            STATE: string; 
-            SchoolAgePercent: number; 
-            agedependency_senior_cy_p: number; 
-            healthpersonalcare_mp14088a_b_p: number; 
-            occupation_occcons_cy_p: number; 
-            occupation_occfarm_cy_p: number; 
-            occupation_occprot_cy_p: number; 
-            populationtotals_totpop_cy: number; 
-            raceandhispanicorigin_hisppop_c: number; 
-            raceandhispanicorigin_nhspblk_c: number; 
-            raceandhispanicorigin_nhspwht_c: number; 
+            Enrich4_Stripped_AsthmaFlag: number; 
+            Enrich4_Stripped_ConstructionFl: number; 
+            Enrich4_Stripped_FarmerFlag: number; 
+            Enrich4_Stripped_ProtectiveFlag: number; 
+            Enrich4_Stripped_SchoolAgePerce: number; 
+            Enrich4_Stripped_agedependency_: number; 
+            Enrich4_Stripped_healthpersonal: number; 
+            // 2020 Occupation: Farm/Fish/Forestry: Percent
+            Enrich4_Stripped_occupation_o_1: number; 
+            // 2020 Occupation: Construction/Extraction: Percent
+            Enrich4_Stripped_occupation_occ: number; 
+            // 2020 Occupation: Protective Service: Percent
+            Enrich4_Stripped_occupation_o_2: number; 
+            RacePercent_AsianPacIslander: number; 
+            RacePercent_B03002_calc_pctHisp: number; 
+            RacePercent_B03002_calc_pctBlac: number; 
+            RacePercent_B03002_calc_pctNHWh: number; 
+            RacePercent_OtherRace: number; 
         }
     }
 

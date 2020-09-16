@@ -34,27 +34,27 @@ export const queryPopulationData = async(queryLocation:QueryLocation): Promise<P
         const raceInfo: DonutChartDataItem[] = [
             {
                 label: 'Asian',
-                value: feature.attributes.AsianPacificIslanderPercent >= 0 ? feature.attributes.AsianPacificIslanderPercent : 0,
+                value: feature.attributes.RacePercent_AsianPacIslander >= 0 ? feature.attributes.RacePercent_AsianPacIslander : 0,
                 color: '#FAB58D'
             },
             {
                 label: 'Black',
-                value: feature.attributes.raceandhispanicorigin_nhspblk_c >= 0 ? feature.attributes.raceandhispanicorigin_nhspblk_c : 0,
+                value: feature.attributes.RacePercent_B03002_calc_pctBlac >= 0 ? feature.attributes.RacePercent_B03002_calc_pctBlac : 0,
                 color: '#F89C6C'
             },
             {
                 label: 'Hispanic',
-                value: feature.attributes.raceandhispanicorigin_hisppop_c >= 0 ? feature.attributes.raceandhispanicorigin_hisppop_c : 0,
+                value: feature.attributes.RacePercent_B03002_calc_pctHisp >= 0 ? feature.attributes.RacePercent_B03002_calc_pctHisp : 0,
                 color: '#F5854C'
             },
             {
                 label: 'Other',
-                value: feature.attributes.OtherRacePercent >= 0 ? feature.attributes.AsianPacificIslanderPercent : 0,
+                value: feature.attributes.RacePercent_OtherRace >= 0 ? feature.attributes.RacePercent_OtherRace : 0,
                 color: '#F26930'
             },
             {
                 label: 'White',
-                value: feature.attributes.raceandhispanicorigin_nhspwht_c >= 0 ? feature.attributes.raceandhispanicorigin_nhspwht_c : 0,
+                value: feature.attributes.RacePercent_B03002_calc_pctNHWh >= 0 ? feature.attributes.RacePercent_B03002_calc_pctNHWh : 0,
                 color: '#E64F25'
             }
         ];
@@ -62,33 +62,33 @@ export const queryPopulationData = async(queryLocation:QueryLocation): Promise<P
         const sensitivePopulationInfo: PopulationInfoItem[] = [
             {
                 label: 'Seniors',
-                value: feature.attributes.agedependency_senior_cy_p >= 0 ? feature.attributes.agedependency_senior_cy_p : 0,
+                value: feature.attributes.Enrich4_Stripped_agedependency_ >= 0 ? feature.attributes.Enrich4_Stripped_agedependency_ : 0,
             },
             {
                 label: 'School Age',
-                value: feature.attributes.SchoolAgePercent >= 0 ? feature.attributes.SchoolAgePercent : 0,
+                value: feature.attributes.Enrich4_Stripped_SchoolAgePerce >= 0 ? feature.attributes.Enrich4_Stripped_SchoolAgePerce : 0,
             },
             {
                 label: 'Asthmatic',
-                value: feature.attributes.healthpersonalcare_mp14088a_b_p >= 0 ? feature.attributes.healthpersonalcare_mp14088a_b_p : 0,
+                value: feature.attributes.Enrich4_Stripped_healthpersonal >= 0 ? feature.attributes.Enrich4_Stripped_healthpersonal : 0,
             },
         ];
 
         const occupationInfo: PopulationInfoItem[] = [
             {
                 label: 'Occupation: Construction',
-                value: feature.attributes.occupation_occcons_cy_p >= 0 ? feature.attributes.occupation_occcons_cy_p : 0,
-                aboveNationalAverage: feature.attributes.ConstructionFlag === 1
+                value: feature.attributes.Enrich4_Stripped_occupation_occ >= 0 ? feature.attributes.Enrich4_Stripped_occupation_occ : 0,
+                aboveNationalAverage: feature.attributes.Enrich4_Stripped_ConstructionFl === 1
             },
             {
                 label: 'Occupation: Farm',
-                value: feature.attributes.occupation_occfarm_cy_p >= 0 ? feature.attributes.occupation_occfarm_cy_p : 0,
-                aboveNationalAverage: feature.attributes.FarmerFlag === 1
+                value: feature.attributes.Enrich4_Stripped_occupation_o_1 >= 0 ? feature.attributes.Enrich4_Stripped_occupation_o_1 : 0,
+                aboveNationalAverage: feature.attributes.Enrich4_Stripped_FarmerFlag === 1
             },
             {
                 label: 'Occupation: Protective Service',
-                value: feature.attributes.occupation_occprot_cy_p >= 0 ? feature.attributes.occupation_occprot_cy_p : 0,
-                aboveNationalAverage: false
+                value: feature.attributes.Enrich4_Stripped_occupation_o_2 >= 0 ? feature.attributes.Enrich4_Stripped_occupation_o_2 : 0,
+                aboveNationalAverage: feature.attributes.Enrich4_Stripped_ProtectiveFlag === 1 
             },
         ];
 
