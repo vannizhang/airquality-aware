@@ -1,6 +1,6 @@
 const AppConfig = {
-    'webmap-id': '5f3b7605b3364e7bb2416c93fae00995', 
-    // 'webmap-id': '571b442ff06f47cd9991fe22197276d1',
+    // 'webmap-id': '5f3b7605b3364e7bb2416c93fae00995', 
+    'webmap-id': '571b442ff06f47cd9991fe22197276d1',
     'ari-quality-service': {
         'current': 'https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/AirNowLatestContoursCombined/FeatureServer/0',
         'today': 'https://services.arcgis.com/cJ9YHowT8TU7DUyn/ArcGIS/rest/services/AirNowAQIForecast/FeatureServer/0',
