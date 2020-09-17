@@ -41,6 +41,7 @@ const App = () => {
     const [ populationData, setPopulationData ] = useState<PopulationData>();
     const [ isAboutModalOpen, setIsAboveModalOpen ] = useState<boolean>();
     const [ isLoading, setIsLoading ] = useState<boolean>(false);
+    const [ isSidebarOpen, setIsSidebarOpen ] = useState<boolean>(true)
 
     const queryAppData = async(location:QueryLocation)=>{
 
@@ -55,7 +56,10 @@ const App = () => {
             const windSpeedData = await queryWindSpeedData(location);
             const populationData = await queryPopulationData(location);
 
+            // open sidebar first in mobile view before rendering components inside of it
+            setIsSidebarOpen(true);
             setIsLoading(false);
+
             setAirQualityForecast(airQualityForecastData);
             setWindspeedForecast(windSpeedData);
             setPopulationData(populationData);
@@ -79,6 +83,8 @@ const App = () => {
             </MapView>
 
             <Sidebar
+                isOpen={isSidebarOpen}
+                toggleBtnOnclick={setIsSidebarOpen}
                 infoBtnOnClick={setIsAboveModalOpen.bind(this, true)}
                 isLoading={isLoading}
             >

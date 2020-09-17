@@ -8,18 +8,20 @@ import { UIConfig } from '../../AppConfig';
 
 type Props = {
     isLoading: boolean;
+    isOpen: boolean;
+    toggleBtnOnclick: (val:boolean)=>void;
     infoBtnOnClick: ()=>void;
 }
 
 const Sidebar:React.FC<Props> = ({
     isLoading,
+    isOpen,
+    toggleBtnOnclick,
     infoBtnOnClick,
     children
 }) => {
 
     const { isMobile } = useContext(AppContext);
-
-    const [ isOpen, setIsOpen ] = useState<boolean>(true)
 
     const getToggleBtn = ()=>{
         if(!isMobile){
@@ -27,7 +29,7 @@ const Sidebar:React.FC<Props> = ({
         }
 
         return (
-            <div className='text-center' onClick={setIsOpen.bind(this, !isOpen)}>
+            <div className='text-center padding-leader-quarter padding-trailer-quarter' onClick={toggleBtnOnclick.bind(this, !isOpen)}>
                 { isOpen ? <span className='icon-ui-down'></span> : <span className='icon-ui-up'></span>}
             </div>
         )
@@ -40,9 +42,10 @@ const Sidebar:React.FC<Props> = ({
                 'right': 0,
                 'top': isOpen ? 0 : 'auto',
                 'bottom': 0,
+                'left': isMobile ? 0 : 'unset',
                 'overflowY': 'auto',
                 'overflowX': 'hidden',
-                'width': UIConfig["sidebar-width"],
+                'width': isMobile ? 'unset' : UIConfig["sidebar-width"],
                 'boxSizing': 'border-box',
                 'background': UIConfig["sidebar-background"],
                 'color': UIConfig["text-color"],
