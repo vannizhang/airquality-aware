@@ -71,7 +71,7 @@ const Sidebar:React.FC<Props> = ({
                     </div>
 
                     <div className='font-size--3 trailer-0'>
-                        <span>data: EPA, NOAA, Census</span>
+                        <span>data: <a className='link-light-blue' href='https://www.airnow.gov/' target='_blank'>EPA AirNow</a>, <a className='link-light-blue' href='https://www.noaa.gov/' target='_blank'>NOAA</a>, <a className='link-light-blue' href='https://www.census.gov/' target='_blank'>Census</a></span>
                     </div>
                 </div>
 

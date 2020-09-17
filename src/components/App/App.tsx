@@ -11,6 +11,8 @@ import AirQualityIndicator from '../AirQualityIndicator/AirQualityIndicator';
 import WindspeedChart from '../WindspeedChart/WindspeedChart';
 import PopulationInfo from '../PopulationInfo/PopulationInfo';
 import About from '../AboutModal/AboutModal';
+import ReverseGeocodingResultText from '../ReverseGeocodingResultText/ReverseGeocodingResultText';
+import QueryLocationPoint from '../QueryLocationPoint/QueryLocationPoint';
 
 import AppConfig from '../../AppConfig';
 
@@ -33,6 +35,11 @@ import {
     queryPopulationData
 } from '../../utils/queryPopulationData';
 
+import {
+    ReverseGeocodingResult,
+    reverseGeocode
+} from '../../utils/reverseGeocoding'
+
 const App = () => {
 
     const searchWidgetContainerRef = useRef<HTMLDivElement>();
@@ -41,33 +48,42 @@ const App = () => {
     const [ populationData, setPopulationData ] = useState<PopulationData>();
     const [ isAboutModalOpen, setIsAboveModalOpen ] = useState<boolean>();
     const [ isLoading, setIsLoading ] = useState<boolean>(false);
-    const [ isSidebarOpen, setIsSidebarOpen ] = useState<boolean>(true)
+    const [ isSidebarOpen, setIsSidebarOpen ] = useState<boolean>(true);
+    const [ reverseGeocodingResult, setReverseGeocodingResult ] = useState<ReverseGeocodingResult>();
+    const [ queryLocation, setQueryLocation] = useState<QueryLocation>();
 
     const queryAppData = async(location:QueryLocation)=>{
 
         setAirQualityForecast(undefined);
         setWindspeedForecast(undefined);
         setPopulationData(undefined);
-
         setIsLoading(true);
+        setReverseGeocodingResult(undefined);
+        setQueryLocation(location);
 
         try {
-            const airQualityForecastData = await queryAirQualityData(location);
-            const windSpeedData = await queryWindSpeedData(location);
-            const populationData = await queryPopulationData(location);
+            const reverseGeocodingResult = await reverseGeocode(location);
+            setReverseGeocodingResult(reverseGeocodingResult);
 
-            // open sidebar first in mobile view before rendering components inside of it
-            setIsSidebarOpen(true);
-            setIsLoading(false);
+            if(!reverseGeocodingResult.error){
 
-            setAirQualityForecast(airQualityForecastData);
-            setWindspeedForecast(windSpeedData);
-            setPopulationData(populationData);
+                const airQualityForecastData = await queryAirQualityData(location);
+                const windSpeedData = await queryWindSpeedData(location);
+                const populationData = await queryPopulationData(location);
+    
+                // open sidebar first in mobile view before rendering components inside of it
+                setIsSidebarOpen(true);
+                
+                setAirQualityForecast(airQualityForecastData);
+                setWindspeedForecast(windSpeedData);
+                setPopulationData(populationData);
+            }
 
         } catch(err){
-            setIsLoading(false);
             console.log(err);
         }
+
+        setIsLoading(false);
     }
 
     return (
@@ -79,6 +95,10 @@ const App = () => {
                 <SearchWidget 
                     containerRef={searchWidgetContainerRef}
                     searchCompletedHandler={queryAppData}
+                />
+
+                <QueryLocationPoint 
+                    queryResult={queryLocation}
                 />
             </MapView>
 
@@ -97,6 +117,10 @@ const App = () => {
                     }}
                     className='search-widget-container'
                 ></div>
+
+                <ReverseGeocodingResultText 
+                    data={reverseGeocodingResult}
+                />
 
                 <AirQualityIndicator 
                     data={airQualityForecast}

@@ -13,7 +13,7 @@ type Props = {
 
 const ColorLookup:Record<AirQualityCategory, string> = {
     'Good': '#0ca98c',
-    'Moderate': '#b8b774',
+    'Moderate': 'rgb(171,169,56)',
     'Unhealthy for Sensitive Groups': '#d3982d',
     'Unhealthy': '#bd565d',
     'Very Unhealthy': '#7d5a9f',
@@ -153,7 +153,7 @@ const AirQualityIndicator:React.FC<Props> = ({
                         className='font-size--3'
                         style={{
                             'background': ColorLookup[category],
-                            'textShadow': '0 0 3px #000',
+                            'textShadow': '0 0 2px #000',
                             'color': '#fff'
                         }}
                     >
