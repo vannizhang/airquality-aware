@@ -51,12 +51,12 @@ const About: React.FC<Props> = ({
                 <div>
                     <h4>About this app</h4>
 
-                    <p>The Air Quality Aware app is intended to provide information about the current conditions of air quality in the United States, along with the potential human health impacts. The data shown here from the <a href="https://livingatlas.arcgis.com/en/home/" target="_blank">Living Atlas</a> are authoritative U.S. government sources, including:</p>
+                    <p>The Air Quality Aware app is intended to provide information about the current conditions of air quality in the United States, along with the potential human health impacts. The data shown here from the <a className='link-light-blue' href="https://livingatlas.arcgis.com/en/home/" target="_blank">Living Atlas</a> are authoritative U.S. government sources, including:</p>
 
                     <ul>
-                        <li>The Environmental Protection Agency <a href="https://www.airnow.gov/" target="_blank">AirNow</a> program for current and future Air Quality Index information.</li>
-                        <li>The National Weather Service <a href="https://www.arcgis.com/home/item.html?id=47ed83c3b4f943118e848fbfc33d119e" target="_blank">wind forecast</a>.  </li>
-                        <li>U.S. Census - derived <a href="" target="_blank">American Community Survey</a> demographic data, along with variables derived by Esri.</li>
+                        <li>The <b>Environmental Protection Agency</b> <a className='link-light-blue' href="https://www.airnow.gov/" target="_blank">AirNow</a> program for current and future Air Quality Index information.</li>
+                        <li>The <b>NOAA National Weather Service</b> <a className='link-light-blue' href="https://www.arcgis.com/home/item.html?id=47ed83c3b4f943118e848fbfc33d119e" target="_blank">wind forecast</a>.  </li>
+                        <li><b>U.S. Census</b> - derived <a className='link-light-blue' href="https://livingatlas.arcgis.com/en/browse/#d=2&q=ACS&cont=true" target="_blank"> American Community Survey</a> demographic data, along with variables derived by Esri.</li>
                     </ul>
                 </div>
 
@@ -67,7 +67,7 @@ const About: React.FC<Props> = ({
 
                     <p>The National Weather Service’s 72-hour forecast for wind will also be displayed. Scroll down the page and find information for the same Census Tract on racial composition and other at-risk populations for degraded air quality.</p>
 
-                    <p>This app was designed by Esri’s <a href="https://www.esri.com/arcgis-blog/author/dpisut/" target="_blank">Dan Pisut</a>, <a href="https://www.esri.com/arcgis-blog/author/emeriam/" target="_blank">Emily Meriam</a> and <a href="https://github.com/vannizhang" target="_blank">Jinnan Zhang</a>. The source code for the app can be found on <a href="https://github.com/vannizhang/airquality-aware" target="_blank">GitHub</a>.  </p>
+                    <p>This app was designed by Esri’s <a className='link-light-blue' href="https://www.esri.com/arcgis-blog/author/dpisut/" target="_blank">Dan Pisut</a>, <a className='link-light-blue' href="https://www.esri.com/arcgis-blog/author/emeriam/" target="_blank">Emily Meriam</a> and <a className='link-light-blue' href="https://github.com/vannizhang" target="_blank">Jinnan Zhang</a>. The source code for the app can be found on <a className='link-light-blue' href="https://github.com/vannizhang/airquality-aware" target="_blank">GitHub</a>.</p>
                 </div>
                 
             </div>

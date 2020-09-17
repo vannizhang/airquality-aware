@@ -22,7 +22,7 @@ const PopulationInfo:React.FC<Props> = ({
     return data ? (
         <div>
             <SectionHeader 
-                text='Popluation'
+                text='Population'
             />
 
             <div
@@ -56,14 +56,14 @@ const PopulationInfo:React.FC<Props> = ({
                 </div>
 
             </div>
-
+{/* 
             <div
                 className='leader-half'
             >
                 <PctBars 
                     data={data.occupationInfo}
                 />
-            </div>
+            </div> */}
             
         </div>
     ) : null

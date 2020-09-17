@@ -40,7 +40,6 @@ const Sidebar:React.FC<Props> = ({
                 'right': 0,
                 'top': isOpen ? 0 : 'auto',
                 'bottom': 0,
-                'padding': '1rem',
                 'overflowY': 'auto',
                 'overflowX': 'hidden',
                 'width': UIConfig["sidebar-width"],
@@ -57,16 +56,35 @@ const Sidebar:React.FC<Props> = ({
                     display: isOpen ? 'block' : 'none'
                 }}
             >
-                <div>
-                    <div className="trailer-half">
-                        <span className="font-size-2">Air Quality Aware</span>
+                <div
+                    style={{
+                        backgroundColor: UIConfig["sidebar-background-opaque"],
+                        padding: '.5rem 1rem'
+                    }}
+                >
+                    <div className="trailer-0">
+                        <span className="font-size-2">Air Quality Aware - Esri</span>
                         <span className="right icon-ui-question cursor-pointer" onClick={infoBtnOnClick}></span>
                     </div>
 
-                    <p className="trailer-half font-size--3">For community awareness within the US about air quality in your area, click on the map or search below</p>
+                    <div className='font-size--3 trailer-0'>
+                        <span>data: EPA, NOAA, Census</span>
+                    </div>
                 </div>
 
-                { children }
+                <div 
+                    className="trailer-quarter"
+                    style={{
+                        padding: '.5rem 1rem 1rem'
+                    }}
+                >
+                    <p className="trailer-half font-size--3">For community awareness within the US about air quality information in your area from the EPA, click on the map or search below.</p>
+
+                    { children }
+
+                </div>
+
+                
             </div>
 
         </div>

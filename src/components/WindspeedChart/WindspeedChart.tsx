@@ -374,7 +374,7 @@ const LineChart:React.FC<LinChartProps> = ({
                     position: 'absolute',
                     top: tooltipPosition.top,
                     left: tooltipPosition.left,
-                    background: 'rgba(0,0,0,.3)',
+                    background: 'rgba(0,0,0,0)',
                     color: UIConfig["text-color"],
                     padding: '.25rem',
                     pointerEvents: 'none',

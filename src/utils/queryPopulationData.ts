@@ -39,12 +39,12 @@ export const queryPopulationData = async(queryLocation:QueryLocation): Promise<P
             {
                 label: 'Asian',
                 value: feature.attributes.RacePercent_AsianPacIslander >= 0 ? feature.attributes.RacePercent_AsianPacIslander : 0,
-                color: '#1253D6'
+                color: '#40C4ED'
             },
             {
                 label: 'Black',
                 value: feature.attributes.RacePercent_B03002_calc_pctBlac >= 0 ? feature.attributes.RacePercent_B03002_calc_pctBlac : 0,
-                color: '#1D6FDC'
+                color: '#35A8E7'
             },
             {
                 label: 'Hispanic',
@@ -54,12 +54,12 @@ export const queryPopulationData = async(queryLocation:QueryLocation): Promise<P
             {
                 label: 'Other',
                 value: feature.attributes.RacePercent_OtherRace >= 0 ? feature.attributes.RacePercent_OtherRace : 0,
-                color: '#35A8E7'
+                color: '#1D6FDC'
             },
             {
                 label: 'White',
                 value: feature.attributes.RacePercent_B03002_calc_pctNHWh >= 0 ? feature.attributes.RacePercent_B03002_calc_pctNHWh : 0,
-                color: '#40C4ED'
+                color: '#1253D6'
             }
         ];
 

@@ -3,6 +3,9 @@ import React from 'react';
 
 import { AirQualityForecast, AirQualityCategory } from 'air-quality-aware';
 import SectionHeader from '../SectionHeader/SectionHeader';
+import {
+    stringFns
+} from 'helper-toolkit-ts';
 
 type Props = {
     data: AirQualityForecast
@@ -28,7 +31,10 @@ const AirQualityIndicator:React.FC<Props> = ({
         return keys.map(key=>{
 
             const catgeory:AirQualityCategory = data[key];
-            const color = ColorLookup[catgeory]
+            const color = ColorLookup[catgeory];
+            const forecastTime = key === 'current' 
+                ? 'Current' 
+                : stringFns.capitalizeFirstLetter(key) + `'s forecast`
 
             return (
                 <div 
@@ -49,8 +55,8 @@ const AirQualityIndicator:React.FC<Props> = ({
                             style={{
                                 'background': color,
                                 'borderRadius': '50%',
-                                'height': '90px',
-                                'width': '90px',
+                                'height': '100px',
+                                'width': '100px',
                                 'display': 'flex',
                                 'justifyContent': 'center',
                                 'alignItems': 'center'
@@ -62,7 +68,7 @@ const AirQualityIndicator:React.FC<Props> = ({
                                     'textShadow': '0 0 3px #000',
                                     'color': '#fff'
                                 }}
-                            >{key}</span>
+                            >{forecastTime}</span>
                         </div>
                     </div>
 
@@ -81,7 +87,7 @@ const AirQualityIndicator:React.FC<Props> = ({
     }
 
     return data ? (
-        <div>
+        <div className="trailer-half">
             <SectionHeader 
                 text='Air Quality Index'
             />

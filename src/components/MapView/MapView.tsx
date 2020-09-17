@@ -5,6 +5,8 @@ import React, {
 import { loadModules, loadCss } from 'esri-loader';
 import IMapView from 'esri/views/MapView';
 import IWebMap from "esri/WebMap";
+import ILocateWidget from "esri/widgets/Locate";
+import IHomeWidget from "esri/widgets/Home"
 
 import { AppContext } from '../../contexts/AppContextProvider';
 
@@ -72,6 +74,36 @@ const MapView:React.FC<Props> = ({
         });
     };
 
+    const initWidgets = async()=>{
+
+        type Modules = [typeof ILocateWidget, typeof IHomeWidget];
+
+        try {
+            const [ 
+                Locate, 
+                Home 
+            ] = await (loadModules([
+                'esri/widgets/Locate',
+                "esri/widgets/Home",
+            ]) as Promise<Modules>);
+
+            const locateWidget = new Locate({
+                view: mapView,   // Attaches the Locate button to the view
+            });
+
+            const homeWidget = new Home({
+                view: mapView
+            });
+
+            mapView.ui.add(locateWidget, "top-left");
+
+            mapView.ui.add(homeWidget, "top-left");
+
+        } catch(err){   
+            console.error(err);
+        }
+    };
+
     React.useEffect(()=>{
         loadCss();
         initMapView();
@@ -81,6 +113,7 @@ const MapView:React.FC<Props> = ({
     React.useEffect(()=>{
         if(mapView){
             initEventListeners();
+            initWidgets();
         }
     }, [mapView]);
 

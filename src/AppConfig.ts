@@ -13,9 +13,10 @@ const AppConfig = {
 export const UIConfig = {
     'sidebar-width': 415,
     'sidebar-background': 'rgba(47,61,94,.8)',
+    'sidebar-background-opaque': 'rgba(47,61,94,1)',
     'text-color': '#E2E2E2',
-    'indicator-label-color': '#E2E2E2',
-    'indicator-value-color': '#F96D48',
+    'indicator-label-color': '#40C4ED', 
+    'indicator-value-color': '#E2E2E2',
     'above-national-ave': '#75C7E9',
     'below-national-ave': '#0878BD'
 };

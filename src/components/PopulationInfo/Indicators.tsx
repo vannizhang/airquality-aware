@@ -17,13 +17,13 @@ const Indicators:React.FC<Props> = ({
                 <div key={d.label} className='text-center trailer-quarter'>
                     <span className='font-size-1'
                         style={{
-                            'color': UIConfig["indicator-label-color"]
+                            'color': UIConfig["indicator-value-color"]
                         }}
                     >{d.value}%</span>
                     <br/>
                     <span className='font-size--1'
                         style={{
-                            'color': '#40C4ED'
+                            'color': UIConfig["indicator-label-color"]
                         }}
                     >{d.label}</span>
                 </div>
