@@ -103,7 +103,7 @@ const AirQualityIndicator:React.FC<Props> = ({
                             <span 
                                 className='font-size--1'
                                 style={{
-                                    'textShadow': '0 0 3px #000',
+                                    'textShadow': '0 0 4px #000',
                                     'color': '#fff'
                                 }}
                             >{forecastTime}</span>
@@ -153,7 +153,7 @@ const AirQualityIndicator:React.FC<Props> = ({
                         className='font-size--3'
                         style={{
                             'background': ColorLookup[category],
-                            'textShadow': '0 0 2px #000',
+                            'textShadow': '0 0 4px #000',
                             'color': '#fff'
                         }}
                     >

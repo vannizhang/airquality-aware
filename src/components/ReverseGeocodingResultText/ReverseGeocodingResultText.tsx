@@ -17,7 +17,7 @@ const ReverseGeocodingResultText:React.FC<Props> = ({
         const { City, Region, Subregion, Postal } = data.address;
 
         return (
-            <span className='font-size--1 avenir-light'>Information for {City || Postal}, {Region}</span>
+            <span className='font-size--1 avenir-light'>Information for selected neighorhood in {City || Postal}, {Region}</span>
         );
     }
 

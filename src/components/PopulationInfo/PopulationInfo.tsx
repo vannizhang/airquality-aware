@@ -7,7 +7,7 @@ import DonutChart, {
     DonutChartDataItem 
 } from './DonutChart';
 import Indicators from './Indicators';
-import PctBars from './PercentageBars';
+import WorkersAtRisk from './WorkersAtRisk';
 import SectionHeader from '../SectionHeader/SectionHeader';
 import { UIConfig } from '../../AppConfig';
 
@@ -56,6 +56,10 @@ const PopulationInfo:React.FC<Props> = ({
                 </div>
 
             </div>
+
+            <WorkersAtRisk 
+                data={data.atRiskOccupationsInfo}
+            />
 {/* 
             <div
                 className='leader-half'

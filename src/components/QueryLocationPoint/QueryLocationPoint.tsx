@@ -57,7 +57,7 @@ const QueryLocationPoint: React.FC<Props>  = ({
         const graphic = new Graphic({
             geometry: new Point(queryResult),
             symbol: new SimpleMarkerSymbol({
-                color: UIConfig["indicator-label-color"],
+                color: UIConfig["indicator-color"],
                 outline: {
                     // autocasts as new SimpleLineSymbol()
                     color: 'rgba(255,255,255,0)',

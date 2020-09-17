@@ -4,16 +4,22 @@ import {
     QueryLocation,
     PopulationInfoFeature,
     PopulationInfoItem,
-    PopulationData
+    PopulationData, 
+    RaceInfoFeature, 
+    AtRiskPopulationFeature,
+    AtRisOccupationsInfo
 } from 'air-quality-aware';
 
 import{ DonutChartDataItem } from '../components/PopulationInfo/DonutChart';
 
 import AppConfig from '../AppConfig';
 
-export const queryPopulationData = async(queryLocation:QueryLocation): Promise<PopulationData>=>{
+const queryRaceInfo = async(queryLocation:QueryLocation): Promise<{
+    raceInfo: DonutChartDataItem[],
+    totalPopulation: number
+}>=>{
 
-    const serviceUrl = AppConfig["enriched-population-service"];
+    const raceInfoServiceURL = AppConfig["race-info-service"];
 
     const params = {
         f: 'json',
@@ -25,88 +31,156 @@ export const queryPopulationData = async(queryLocation:QueryLocation): Promise<P
     };
 
     try {
-        const res = await axios(`${serviceUrl}/query`, { params });
-        // console.log(res);
 
-        const feature:PopulationInfoFeature = res?.data?.features?.[0]
-        console.log(feature);
-
-        if(!feature){
-            return undefined;
-        }
-
-        const raceInfo: DonutChartDataItem[] = [
+        const raceInfoRes = await axios(`${raceInfoServiceURL}/query`, { 
+            params
+        });
+        const raceInfofeature:RaceInfoFeature = raceInfoRes?.data?.features?.[0]
+    
+        const totalPopulation = raceInfofeature.attributes.B03002_001E;
+    
+        const raceInfo: DonutChartDataItem[] = raceInfofeature ? [
             {
-                label: 'Asian',
-                value: feature.attributes.RacePercent_AsianPacIslander >= 0 ? feature.attributes.RacePercent_AsianPacIslander : 0,
-                color: '#40C4ED'
+                label: 'White',
+                value: raceInfofeature.attributes.B03002_calc_pctNHWhiteE,
+                color: '#999284'
             },
             {
                 label: 'Black',
-                value: feature.attributes.RacePercent_B03002_calc_pctBlac >= 0 ? feature.attributes.RacePercent_B03002_calc_pctBlac : 0,
-                color: '#35A8E7'
+                value: raceInfofeature.attributes.B03002_calc_pctBlackE,
+                color: '#ff5959'
             },
             {
-                label: 'Hispanic',
-                value: feature.attributes.RacePercent_B03002_calc_pctHisp >= 0 ? feature.attributes.RacePercent_B03002_calc_pctHisp : 0,
-                color: '#298BE2'
+                label: 'Native American',
+                value: raceInfofeature.attributes.B03002_calc_pctAIANE,
+                color: '#00a1e6'
+            },
+            {
+                label: 'Asian',
+                value: raceInfofeature.attributes.B03002_calc_pctAsianE,
+                color: '#ab579d'
+            },
+            {
+                label: 'Pacific Islander',
+                value: raceInfofeature.attributes.B03002_calc_pctNHOPIE,
+                color: '#00c0c7'
             },
             {
                 label: 'Other',
-                value: feature.attributes.RacePercent_OtherRace >= 0 ? feature.attributes.RacePercent_OtherRace : 0,
-                color: '#1D6FDC'
+                value: raceInfofeature.attributes.B03002_calc_pctOtherE,
+                color: '#cdcdb9'
             },
             {
-                label: 'White',
-                value: feature.attributes.RacePercent_B03002_calc_pctNHWh >= 0 ? feature.attributes.RacePercent_B03002_calc_pctNHWh : 0,
-                color: '#1253D6'
+                label: 'Two or More Races',
+                value: raceInfofeature.attributes.B03002_calc_pct2OrMoreE,
+                color: '#d1c10d'
+            },
+            {
+                label: 'Hispanic',
+                value: raceInfofeature.attributes.B03002_calc_pctHispLatE,
+                color: '#69bf71'
             }
-        ];
+        ] : undefined;
+    
+        return {
+            raceInfo,
+            totalPopulation
+        }
+
+    } catch(err){
+        console.error(err);
+
+        return {
+            raceInfo: undefined,
+            totalPopulation: undefined
+        };
+    }
+
+}
+
+const queryAtRiskPopulation = async(queryLocation:QueryLocation): Promise<{
+    sensitivePopulationInfo: PopulationInfoItem[]
+    atRiskOccupationsInfo: AtRisOccupationsInfo
+}>=>{
+
+    const atRsikPopuServiceURL = AppConfig["at-risk-population-service"];
+
+    const params = {
+        f: 'json',
+        outFields: '*',
+        geometry: JSON.stringify(queryLocation),
+        geometryType: 'esriGeometryPoint',
+        spatialRel: 'esriSpatialRelIntersects',
+        returnGeometry: 'false'
+    };
+
+    try {
+        const res = await axios(`${atRsikPopuServiceURL}/query`, { params });
+        const feature:AtRiskPopulationFeature = res?.data?.features?.[0]
 
         const sensitivePopulationInfo: PopulationInfoItem[] = [
             {
                 label: 'Seniors',
-                value: feature.attributes.Enrich4_Stripped_agedependency_ >= 0 ? feature.attributes.Enrich4_Stripped_agedependency_ : 0,
+                value: +feature.attributes.PctSeniors.toFixed(1),
+                aboveNationalAverage: feature.attributes.FlagSeniors === 1
             },
             {
                 label: 'School Age',
-                value: feature.attributes.Enrich4_Stripped_SchoolAgePerce >= 0 ? feature.attributes.Enrich4_Stripped_SchoolAgePerce : 0,
+                value: +feature.attributes.PctChildrenAtRisk.toFixed(1),
+                aboveNationalAverage: feature.attributes.FlagChildren === 1
             },
             {
                 label: 'Asthmatic',
-                value: feature.attributes.Enrich4_Stripped_healthpersonal >= 0 ? feature.attributes.Enrich4_Stripped_healthpersonal : 0,
+                value: +((feature.attributes.MP14088a_B / feature.attributes.TOTPOP_CY) * 100).toFixed(1),
+                aboveNationalAverage: feature.attributes.MP14088a_I > 100
             },
         ];
 
-        const occupationInfo: PopulationInfoItem[] = [
-            {
-                label: 'Occupation: Construction',
-                value: feature.attributes.Enrich4_Stripped_occupation_occ >= 0 ? feature.attributes.Enrich4_Stripped_occupation_occ : 0,
-                aboveNationalAverage: feature.attributes.Enrich4_Stripped_ConstructionFl === 1
-            },
-            {
-                label: 'Occupation: Farm, Fishing, Forestry',
-                value: feature.attributes.Enrich4_Stripped_occupation_o_1 >= 0 ? feature.attributes.Enrich4_Stripped_occupation_o_1 : 0,
-                aboveNationalAverage: feature.attributes.Enrich4_Stripped_FarmerFlag === 1
-            },
-            {
-                label: 'Occupation: Protective Services',
-                value: feature.attributes.Enrich4_Stripped_occupation_o_2 >= 0 ? feature.attributes.Enrich4_Stripped_occupation_o_2 : 0,
-                aboveNationalAverage: feature.attributes.Enrich4_Stripped_ProtectiveFlag === 1 
-            },
-        ];
+        const atRiskOccupationsInfo:AtRisOccupationsInfo = {
+            total: feature.attributes.AtRiskOccupations,
+            percent: +feature.attributes.PctOccAtRisk.toFixed(1),
+            aboveNationalAverage: feature.attributes.FlagOcc === 1
+        }
 
-        const totalPopulation = feature.attributes.RacePercent_B03002_001E;
+        return {
+            sensitivePopulationInfo,
+            atRiskOccupationsInfo
+        };
+
+    } catch(err){
+        console.error(err);
+
+        return {
+            sensitivePopulationInfo: undefined,
+            atRiskOccupationsInfo: undefined
+        };
+    }
+}
+
+export const queryPopulationData = async(queryLocation:QueryLocation): Promise<PopulationData>=>{
+
+    try {
+
+        const { 
+            raceInfo, 
+            totalPopulation 
+        } = await queryRaceInfo(queryLocation);
+
+        const { 
+            sensitivePopulationInfo, 
+            atRiskOccupationsInfo 
+        } = await queryAtRiskPopulation(queryLocation);
 
         return {
             raceInfo,
             sensitivePopulationInfo,
-            occupationInfo,
+            atRiskOccupationsInfo,
             totalPopulation
         };
 
     } catch(err){
         console.error(err);
+        return undefined;
     }
 
 };

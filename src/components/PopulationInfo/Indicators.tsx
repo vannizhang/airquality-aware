@@ -1,6 +1,7 @@
 import React from 'react'
 import { UIConfig } from '../../AppConfig';
-import { PopulationInfoItem } from 'air-quality-aware'
+import { PopulationInfoItem } from 'air-quality-aware';
+import Indicator from './Indicator';
 
 type Props = {
     data: PopulationInfoItem[];
@@ -14,19 +15,11 @@ const Indicators:React.FC<Props> = ({
 
         return data.map(d=>{
             return (
-                <div key={d.label} className='text-center trailer-quarter'>
-                    <span className='font-size-1'
-                        style={{
-                            'color': UIConfig["indicator-value-color"]
-                        }}
-                    >{d.value}%</span>
-                    <br/>
-                    <span className='font-size--1'
-                        style={{
-                            'color': UIConfig["indicator-label-color"]
-                        }}
-                    >{d.label}</span>
-                </div>
+                <Indicator 
+                    key={d.label}
+                    label={d.label}
+                    value={d.value + '%'}
+                />
             )
         })
     };
