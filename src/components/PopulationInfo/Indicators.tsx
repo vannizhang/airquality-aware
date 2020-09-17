@@ -19,6 +19,7 @@ const Indicators:React.FC<Props> = ({
                     key={d.label}
                     label={d.label}
                     value={d.value + '%'}
+                    aboveAverage={d.aboveNationalAverage}
                 />
             )
         })

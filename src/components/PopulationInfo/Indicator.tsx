@@ -4,17 +4,19 @@ import { UIConfig } from '../../AppConfig';
 type Props = {
     label: string;
     value: string;
+    aboveAverage?: boolean;
 }
 
 const Indicator:React.FC<Props> = ({
     label,
-    value
+    value,
+    aboveAverage
 }) => {
     return (
         <div className='text-center trailer-quarter'>
             <span className='font-size-1'
                 style={{
-                    'color': UIConfig["indicator-color"]
+                    'color': aboveAverage ? UIConfig["indicator-color-above-national-ave"] : UIConfig["indicator-color"]
                 }}
             >{value}</span>
             <br/>

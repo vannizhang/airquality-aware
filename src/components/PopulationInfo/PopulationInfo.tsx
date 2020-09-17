@@ -60,14 +60,22 @@ const PopulationInfo:React.FC<Props> = ({
             <WorkersAtRisk 
                 data={data.atRiskOccupationsInfo}
             />
-{/* 
+
             <div
-                className='leader-half'
+                className='leader-1 text-center font-size--2'
             >
-                <PctBars 
-                    data={data.occupationInfo}
-                />
-            </div> */}
+                <span className='margin-right-2'
+                    style={{
+                        color: UIConfig["indicator-color-above-national-ave"]
+                    }}
+                >above U.S. average</span>
+
+                <span
+                    style={{
+                        color: UIConfig["indicator-color"]
+                    }}
+                >below U.S. average</span>
+            </div>
             
         </div>
     ) : null
