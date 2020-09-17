@@ -6,7 +6,8 @@ import { loadModules, loadCss } from 'esri-loader';
 import IMapView from 'esri/views/MapView';
 import IWebMap from "esri/WebMap";
 import ILocateWidget from "esri/widgets/Locate";
-import IHomeWidget from "esri/widgets/Home"
+import IHomeWidget from "esri/widgets/Home";
+import IwatchUtils from 'esri/core/watchUtils';
 
 import { AppContext } from '../../contexts/AppContextProvider';
 
@@ -15,6 +16,12 @@ import { UIConfig } from '../../AppConfig';
 import {
     QueryLocation
 } from 'air-quality-aware';
+
+import {
+    saveMapLocationInUrlHashParams,
+    getMapLocationFromUrlHashParams,
+    MapCenterLocation
+} from '../../utils/UrlHashParams';
 
 type Props = {
     webmapId: string;
@@ -46,6 +53,8 @@ const MapView:React.FC<Props> = ({
                 'esri/WebMap',
             ]) as Promise<Modules>);
 
+            const defaultMapLocation = getMapLocationFromUrlHashParams();
+
             const view = new MapView({
                 container: mapDivRef.current,
                 map: new WebMap({
@@ -55,7 +64,9 @@ const MapView:React.FC<Props> = ({
                 }),
                 padding: {
                     right: !isMobile ? UIConfig["sidebar-width"] : 0
-                }
+                },
+                zoom: defaultMapLocation ?  defaultMapLocation.zoom : undefined,
+                center: defaultMapLocation ? [ defaultMapLocation.lon, defaultMapLocation.lat ] : undefined
             });
 
             view.when(()=>{
@@ -67,11 +78,44 @@ const MapView:React.FC<Props> = ({
         }
     };
 
-    const initEventListeners = () => {
+    const initEventListeners = async() => {
+
         mapView.on('click', (event) => {
             const mapPoint = event.mapPoint.toJSON() as QueryLocation;
             onClickHandler(mapPoint);
         });
+
+        type Modules = [typeof IwatchUtils];
+
+        try {
+            const [watchUtils] = await (loadModules([
+                'esri/core/watchUtils',
+            ]) as Promise<Modules>);
+
+            watchUtils.whenTrue(mapView, 'stationary', () => {
+                // console.log('mapview is stationary', mapView.center, mapView.zoom);
+
+                if (mapView.zoom === -1) {
+                    return;
+                }
+
+                const centerLocation: MapCenterLocation = {
+                    lat:
+                        mapView.center && mapView.center.latitude
+                            ? +mapView.center.latitude.toFixed(3)
+                            : 0,
+                    lon:
+                        mapView.center && mapView.center.longitude
+                            ? +mapView.center.longitude.toFixed(3)
+                            : 0,
+                    zoom: mapView.zoom,
+                };
+
+                saveMapLocationInUrlHashParams(centerLocation);
+            });
+        } catch (err) {
+            console.error(err);
+        }
     };
 
     const initWidgets = async()=>{
