@@ -19,7 +19,7 @@ const PopulationInfo:React.FC<Props> = ({
     data
 }:Props) => {
 
-    return data ? (
+    return data && data.raceInfo && data.sensitivePopulationInfo ? (
         <div>
             <SectionHeader 
                 text='Population'

@@ -35,7 +35,14 @@ const queryRaceInfo = async(queryLocation:QueryLocation): Promise<{
         const raceInfoRes = await axios(`${raceInfoServiceURL}/query`, { 
             params
         });
-        const raceInfofeature:RaceInfoFeature = raceInfoRes?.data?.features?.[0]
+        const raceInfofeature:RaceInfoFeature = raceInfoRes?.data?.features?.[0];
+
+        if(!raceInfofeature){
+            return {
+                raceInfo: undefined,
+                totalPopulation: undefined
+            };
+        }
     
         const totalPopulation = raceInfofeature.attributes.B03002_001E;
     
@@ -117,6 +124,13 @@ const queryAtRiskPopulation = async(queryLocation:QueryLocation): Promise<{
     try {
         const res = await axios(`${atRsikPopuServiceURL}/query`, { params });
         const feature:AtRiskPopulationFeature = res?.data?.features?.[0]
+
+        if(!feature){
+            return {
+                sensitivePopulationInfo: undefined,
+                atRiskOccupationsInfo: undefined
+            };
+        }
 
         const sensitivePopulationInfo: PopulationInfoItem[] = [
             {
