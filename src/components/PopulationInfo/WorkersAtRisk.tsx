@@ -2,6 +2,7 @@ import { AtRisOccupationsInfo } from 'air-quality-aware';
 import React from 'react'
 import SectionHeader from '../SectionHeader/SectionHeader';
 import Indicator from './Indicator';
+import { numberFns } from 'helper-toolkit-ts';
 
 type Props = {
     data: AtRisOccupationsInfo
@@ -27,7 +28,7 @@ const WorkersAtRisk:React.FC<Props> = ({
                 }}>
                     <Indicator 
                         label='workers'
-                        value={data.total.toString()}
+                        value={numberFns.numberWithCommas(data.total)}
                     />
                 </div>
 
