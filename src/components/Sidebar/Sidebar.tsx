@@ -7,15 +7,17 @@ import { AppContext } from '../../contexts/AppContextProvider';
 import { UIConfig } from '../../AppConfig';
 
 type Props = {
+    isExpanded: boolean;
     isLoading: boolean;
-    isOpen: boolean;
+    isContentVisible: boolean;
     toggleBtnOnclick: (val:boolean)=>void;
     infoBtnOnClick: ()=>void;
 }
 
 const Sidebar:React.FC<Props> = ({
+    isExpanded,
     isLoading,
-    isOpen,
+    isContentVisible,
     toggleBtnOnclick,
     infoBtnOnClick,
     children
@@ -29,8 +31,8 @@ const Sidebar:React.FC<Props> = ({
         }
 
         return (
-            <div className='text-center padding-leader-quarter padding-trailer-quarter' onClick={toggleBtnOnclick.bind(this, !isOpen)}>
-                { isOpen ? <span className='icon-ui-down'></span> : <span className='icon-ui-up'></span>}
+            <div className='text-center padding-leader-quarter padding-trailer-quarter' onClick={toggleBtnOnclick.bind(this, !isContentVisible)}>
+                { isContentVisible ? <span className='icon-ui-down'></span> : <span className='icon-ui-up'></span>}
             </div>
         )
     }
@@ -40,8 +42,9 @@ const Sidebar:React.FC<Props> = ({
             style={{
                 'position': 'absolute',
                 'right': 0,
-                'top': isOpen ? 0 : 'auto',
-                'bottom': 0,
+                'top': !isMobile ? 0: 'unset',
+                'bottom': isExpanded || isMobile ? 0 : 'unset',
+                'maxHeight': '100%',
                 'left': isMobile ? 0 : 'unset',
                 'overflowY': 'auto',
                 'overflowX': 'hidden',
@@ -56,7 +59,7 @@ const Sidebar:React.FC<Props> = ({
 
             <div
                 style={{
-                    display: isOpen ? 'block' : 'none'
+                    display: isContentVisible ? 'block' : 'none'
                 }}
             >
                 <div

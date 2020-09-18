@@ -48,12 +48,17 @@ const App = () => {
     const [ populationData, setPopulationData ] = useState<PopulationData>();
     const [ isAboutModalOpen, setIsAboveModalOpen ] = useState<boolean>();
     const [ isLoading, setIsLoading ] = useState<boolean>(false);
-    const [ isSidebarOpen, setIsSidebarOpen ] = useState<boolean>(true);
+    const [ isSidebarContentVisible, setIsSidebarContentVisible ] = useState<boolean>(true);
     const [ reverseGeocodingResult, setReverseGeocodingResult ] = useState<ReverseGeocodingResult>();
     const [ queryLocation, setQueryLocation] = useState<QueryLocation>();
+    const [ isSideBarExpanded, setIsSidebarExpanded ] = useState<boolean>();
 
     const queryAppData = async(location:QueryLocation)=>{
 
+        if(!isSideBarExpanded){
+            setIsSidebarExpanded(true);
+        }
+        
         setAirQualityForecast(undefined);
         setWindspeedForecast(undefined);
         setPopulationData(undefined);
@@ -72,7 +77,7 @@ const App = () => {
                 const populationData = await queryPopulationData(location);
     
                 // open sidebar first in mobile view before rendering components inside of it
-                setIsSidebarOpen(true);
+                setIsSidebarContentVisible(true);
                 
                 setAirQualityForecast(airQualityForecastData);
                 setWindspeedForecast(windSpeedData);
@@ -103,8 +108,9 @@ const App = () => {
             </MapView>
 
             <Sidebar
-                isOpen={isSidebarOpen}
-                toggleBtnOnclick={setIsSidebarOpen}
+                isExpanded={isSideBarExpanded}
+                isContentVisible={isSidebarContentVisible}
+                toggleBtnOnclick={setIsSidebarContentVisible}
                 infoBtnOnClick={setIsAboveModalOpen.bind(this, true)}
                 isLoading={isLoading}
             >
