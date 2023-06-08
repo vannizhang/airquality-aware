@@ -38,6 +38,12 @@ export const queryAirQualityData = async(queryLocation:QueryLocation):Promise<Ai
 
     try {
         const resCurrent = await axios(`${current}/query`, { params });
+        // console.log(resCurrent)
+
+        if(resCurrent?.data?.error){
+            throw(resCurrent?.data?.error)
+        }
+
         const feature4CurrentCondition:AirQualityLayerFeature = resCurrent.data && resCurrent.data.features && resCurrent.data.features[0] 
             ? resCurrent.data.features[0] 
             : undefined;
@@ -46,6 +52,12 @@ export const queryAirQualityData = async(queryLocation:QueryLocation):Promise<Ai
             : 'Good';
     
         const resToday = await axios(`${today}/query`, { params });
+        // console.log(resToday)
+
+        if(resToday?.data?.error){
+            throw(resToday?.data?.error)
+        }
+
         const feature4TodayCondition:AirQualityLayerFeature = resToday.data && resToday.data.features && resToday.data.features[0] 
             ? resToday.data.features[0] 
             : undefined;
@@ -54,6 +66,11 @@ export const queryAirQualityData = async(queryLocation:QueryLocation):Promise<Ai
             : 'Good';
     
         const resTomorrow = await axios(`${tomorrow}/query`, { params });
+        // console.log(resTomorrow)
+
+        if(resTomorrow?.data?.error){
+            throw(resTomorrow?.data?.error)
+        }
         const feature4TomorrowCondition:AirQualityLayerFeature = resTomorrow.data && resTomorrow.data.features && resTomorrow.data.features[0] 
             ? resTomorrow.data.features[0] 
             : undefined;

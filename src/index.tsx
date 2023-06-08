@@ -6,11 +6,11 @@ import ReactDOM from 'react-dom';
 import AppContextProvider from './contexts/AppContextProvider';
 import App from './components/App/App';
 
-import { setDefaultOptions } from 'esri-loader';
+// import { setDefaultOptions } from 'esri-loader';
 
-setDefaultOptions({
-    url: 'https://js.arcgis.com/next/'
-});
+// setDefaultOptions({
+//     url: 'https://js.arcgis.com/next/'
+// });
 
 ReactDOM.render(
     <AppContextProvider>
