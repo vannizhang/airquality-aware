@@ -1,7 +1,7 @@
 import './styles/index.scss';
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 import AppContextProvider from './contexts/AppContextProvider';
 import App from './components/App/App';
@@ -12,9 +12,10 @@ import App from './components/App/App';
 //     url: 'https://js.arcgis.com/next/'
 // });
 
-ReactDOM.render(
+const root = createRoot(document.getElementById('root'));
+
+root.render(
     <AppContextProvider>
         <App />
-    </AppContextProvider>,
-    document.getElementById('root')
+    </AppContextProvider>
 );
