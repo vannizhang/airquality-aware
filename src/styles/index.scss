@@ -1,34 +1,36 @@
 @import '~calcite-web/dist/css/calcite-web.min.css';
 @import 'https://js.arcgis.com/4.29/@arcgis/core/assets/esri/themes/dark/main.css';
+@import './variables.css';
+@import './CustomMapPopupStyle.css';
 
 .cursor-pointer{
     cursor: pointer;
 }
 
 // customize style for ArcGIS JS API Popup Window
-#root {
-    .esri-popup{
-        .esri-widget {
-            background-color: transparent;
-            color: #E2E2E2;
+// #root {
+//     .esri-popup{
+//         .esri-widget {
+//             background-color: transparent;
+//             color: #E2E2E2;
 
-            a {
-                color: #E2E2E2;
-            }
-        }
+//             a {
+//                 color: #E2E2E2;
+//             }
+//         }
 
-        .esri-popup__main-container,
-        .esri-popup__pointer-direction,
-        .esri-popup__navigation,
-        .esri-feature__content-node { 
-            background-color:rgba(47,61,94,1);
-            color:#E2E2E2;
-        }
+//         .esri-popup__main-container,
+//         .esri-popup__pointer-direction,
+//         .esri-popup__navigation,
+//         .esri-feature__content-node { 
+//             background-color:rgba(47,61,94,1);
+//             color:#E2E2E2;
+//         }
 
-        .esri-popup__header-title:hover,
-        .esri-popup__button:hover {
-            background-color: rgba(47,61,94,1);
-        }
+//         .esri-popup__header-title:hover,
+//         .esri-popup__button:hover {
+//             background-color: rgba(47,61,94,1);
+//         }
 
-    }
-}
+//     }
+// }
