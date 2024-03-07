@@ -26,7 +26,7 @@ const Gridcode2AirQualityCategoryLookup: {
 const bbox = {
     xmin: -170,
     xmax: -50,
-    ymin: 20,
+    ymin: 16,
     ymax: 70
 }
 
