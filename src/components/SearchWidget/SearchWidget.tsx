@@ -41,7 +41,12 @@ const SearchWidget:React.FC<Props> = ({
                 if(searchWidget.results[0] && searchWidget.results[0].results[0]){
                     const searchResultGeom:Point = searchWidget.results[0].results[0].feature.geometry;
                     // console.log(searchResultGeom);
-                    searchCompletedHandler(searchResultGeom.toJSON())
+
+                    const { x, y, latitude, longitude, spatialReference } = searchResultGeom;
+                    
+                    searchCompletedHandler({
+                        x, y, latitude, longitude, spatialReference: spatialReference as any
+                    })
                 }
             })
 

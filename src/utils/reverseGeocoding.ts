@@ -24,20 +24,24 @@ export const reverseGeocode = async(location:QueryLocation):Promise<ReverseGeoco
 
     const requestUrl = 'https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode';
 
+    const {
+        longitude,
+        latitude,
+        // spatialReference
+    } = location
+
     const params = {
-        location: JSON.stringify(location),
+        location: JSON.stringify({
+            x: longitude,
+            y: latitude,
+            spatialReference: {
+                wkid: 4326
+            }
+        }),
         f: 'json'
     };
 
-    try {
-        const { data } = await axios.get(requestUrl, { params});
+    const { data } = await axios.get(requestUrl, { params});
 
-        return data;
-        
-    } catch(err){
-        console.log(err);
-        return undefined;
-    }
-
-
+    return data;
 }

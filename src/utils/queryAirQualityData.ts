@@ -38,8 +38,6 @@ export const queryAirQualityData = async(queryLocation:QueryLocation):Promise<Ai
         tomorrow 
     } = AppConfig["ari-quality-service"];
 
-    // console.log(queryLocation)
-
     const { longitude, latitude } = queryLocation;
 
     if(longitude > bbox.xmax || longitude < bbox.xmin || latitude > bbox.ymax || latitude < bbox.ymin){
