@@ -23,7 +23,7 @@ module.exports =  (env, options)=> {
             chunkFilename: '[name].[contenthash].js',
             clean: true
         },
-        devtool: 'source-map',
+        // devtool: 'source-map',
         resolve: {
             extensions: ['.js', '.jsx', '.json', '.ts', '.tsx']
         },
