@@ -6,11 +6,12 @@ import { createRoot } from 'react-dom/client';
 import AppContextProvider from './contexts/AppContextProvider';
 import App from './components/App/App';
 
-// import { setDefaultOptions } from 'esri-loader';
+import { setDefaultOptions } from 'esri-loader';
 
-// setDefaultOptions({
-//     url: 'https://js.arcgis.com/next/'
-// });
+setDefaultOptions({
+    // url: 'https://js.arcgis.com/next/'
+    version: '4.28'
+});
 
 const root = createRoot(document.getElementById('root'));
 

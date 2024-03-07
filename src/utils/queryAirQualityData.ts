@@ -19,6 +19,17 @@ const Gridcode2AirQualityCategoryLookup: {
     6: 'Hazardous'
 };
 
+/**
+ * A hardcoded bbox for the air quality forecast service.
+ * Any query location outside of this bbox should get an error of "No Data"
+ */
+const bbox = {
+    xmin: -170,
+    xmax: -50,
+    ymin: 20,
+    ymax: 70
+}
+
 export const queryAirQualityData = async(queryLocation:QueryLocation):Promise<AirQualityForecast>=>{
 
     const { 
@@ -26,6 +37,14 @@ export const queryAirQualityData = async(queryLocation:QueryLocation):Promise<Ai
         today, 
         tomorrow 
     } = AppConfig["ari-quality-service"];
+
+    // console.log(queryLocation)
+
+    const { longitude, latitude } = queryLocation;
+
+    if(longitude > bbox.xmax || longitude < bbox.xmin || latitude > bbox.ymax || latitude < bbox.ymin){
+        throw new Error('No Data Available');
+    }
 
     const params = {
         f: 'json',

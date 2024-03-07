@@ -53,6 +53,8 @@ const App = () => {
     const [ queryLocation, setQueryLocation] = useState<QueryLocation>();
     const [ isSideBarExpanded, setIsSidebarExpanded ] = useState<boolean>();
 
+    const [queryError, setQueryError] = useState<Error>(null)
+
     const queryAppData = async(location:QueryLocation)=>{
 
         if(!isSideBarExpanded){
@@ -86,10 +88,20 @@ const App = () => {
 
         } catch(err){
             console.log(err);
+            setQueryError(err);
         }
 
         setIsLoading(false);
     }
+
+    useEffect(()=>{
+
+        // reset error from previous query once the data is getting loaded again
+        if(isLoading){
+            setQueryError(null);
+        }
+
+    }, [isLoading])
 
     return (
         <>
@@ -124,21 +136,36 @@ const App = () => {
                     className='search-widget-container'
                 ></div>
 
-                <ReverseGeocodingResultText 
-                    data={reverseGeocodingResult}
-                />
+                {
+                    queryError ? (
+                        <div 
+                            style={{
+                                textAlign: 'center',
+                                padding: '1rem 0'
+                            }}
+                        >
+                            <p>{queryError?.message || 'Failed to fetch data'}</p>
+                        </div>
+                    ) : (
+                        <>
+                            <ReverseGeocodingResultText 
+                                data={reverseGeocodingResult}
+                            />
 
-                <AirQualityIndicator 
-                    data={airQualityForecast}
-                />
+                            <AirQualityIndicator 
+                                data={airQualityForecast}
+                            />
 
-                <WindspeedChart 
-                    data={windspeedForecast}
-                />
+                            <WindspeedChart 
+                                data={windspeedForecast}
+                            />
 
-                <PopulationInfo 
-                    data={populationData}
-                />
+                            <PopulationInfo 
+                                data={populationData}
+                            />
+                        </>
+                    )
+                }
 
                 {
                     isLoading ? (

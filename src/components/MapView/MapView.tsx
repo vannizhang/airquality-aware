@@ -23,6 +23,8 @@ import {
     MapCenterLocation
 } from '../../utils/UrlHashParams';
 
+loadCss();
+
 type Props = {
     webmapId: string;
     onClickHandler: (data:QueryLocation)=>void;
@@ -81,7 +83,23 @@ const MapView:React.FC<Props> = ({
     const initEventListeners = async() => {
 
         mapView.on('click', (event) => {
-            const mapPoint = event.mapPoint.toJSON() as QueryLocation;
+
+            const {
+                spatialReference,
+                x,
+                y,
+                longitude,
+                latitude
+            } = event.mapPoint
+
+            const mapPoint = {
+                spatialReference: spatialReference.toJSON(),
+                x,
+                y,
+                longitude,
+                latitude
+            } as QueryLocation;
+
             onClickHandler(mapPoint);
         });
 
@@ -149,7 +167,6 @@ const MapView:React.FC<Props> = ({
     };
 
     React.useEffect(()=>{
-        loadCss();
         initMapView();
     }, []);
 

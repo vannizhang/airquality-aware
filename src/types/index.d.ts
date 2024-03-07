@@ -13,6 +13,8 @@ declare module 'air-quality-aware' {
         },
         x: number;
         y: number;
+        longitude: number;
+        latitude: number;
     };
 
     
