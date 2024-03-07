@@ -1,14 +1,14 @@
 import './style.scss';
 import React from 'react'
 
-import { loadModules } from 'esri-loader';
-import IMapView from 'esri/views/MapView';
-import IPoint from 'esri/geometry/Point';
-import ISearchWidget from 'esri/widgets/Search';
+// import { loadModules } from 'esri-loader';
+import MapView from '@arcgis/core/views/MapView';
+import Point from '@arcgis/core/geometry/Point';
+import Search from '@arcgis/core/widgets/Search';
 import { QueryLocation } from 'air-quality-aware';
 
 type Props = {
-    mapView?: IMapView,
+    mapView?: MapView,
     containerRef: React.MutableRefObject<HTMLDivElement>
     searchCompletedHandler: (data:QueryLocation)=>void;
 }
@@ -21,14 +21,14 @@ const SearchWidget:React.FC<Props> = ({
 
     const init = async()=>{
 
-        type Modules = [typeof ISearchWidget];
+        // type Modules = [typeof ISearchWidget];
 
         try {
-            const [ 
-                Search, 
-            ] = await (loadModules([
-                'esri/widgets/Search',
-            ]) as Promise<Modules>);
+            // const [ 
+            //     Search, 
+            // ] = await (loadModules([
+            //     'esri/widgets/Search',
+            // ]) as Promise<Modules>);
 
             const searchWidget = new Search({
                 view: mapView,
@@ -39,7 +39,7 @@ const SearchWidget:React.FC<Props> = ({
 
             searchWidget.on('search-complete', evt=>{
                 if(searchWidget.results[0] && searchWidget.results[0].results[0]){
-                    const searchResultGeom:IPoint = searchWidget.results[0].results[0].feature.geometry;
+                    const searchResultGeom:Point = searchWidget.results[0].results[0].feature.geometry;
                     // console.log(searchResultGeom);
                     searchCompletedHandler(searchResultGeom.toJSON())
                 }

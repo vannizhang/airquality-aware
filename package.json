@@ -29,7 +29,6 @@
     "@babel/preset-react": "^7.14.5",
     "@babel/preset-typescript": "^7.14.5",
     "@babel/runtime": "^7.14.6",
-    "@types/arcgis-js-api": "4.15",
     "@types/classnames": "^2.2.10",
     "@types/jest": "^26.0.15",
     "@types/react-dom": "^18.2.7",
@@ -74,13 +73,13 @@
     "webpack-dev-server": "^4.9.3"
   },
   "dependencies": {
+    "@arcgis/core": "^4.29.7",
     "@types/d3": "^5.7.2",
     "axios": "^1.4.0",
     "calcite-web": "github:Esri/calcite-web#v1.2.5",
     "classnames": "^2.2.6",
     "d3": "5.15",
     "date-fns": "^2.16.1",
-    "esri-loader": "3.7",
     "helper-toolkit-ts": "^1.1.13",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",

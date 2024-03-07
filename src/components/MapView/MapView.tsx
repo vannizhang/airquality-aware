@@ -2,12 +2,13 @@ import React, {
     useContext
 } from 'react';
 
-import { loadModules, loadCss } from 'esri-loader';
-import IMapView from 'esri/views/MapView';
-import IWebMap from "esri/WebMap";
-import ILocateWidget from "esri/widgets/Locate";
-import IHomeWidget from "esri/widgets/Home";
-import IwatchUtils from 'esri/core/watchUtils';
+// import { loadModules, loadCss } from 'esri-loader';
+import ArcGISMapView from '@arcgis/core/views/MapView';
+import WebMap from "@arcgis/core/WebMap";
+import Locate from "@arcgis/core/widgets/Locate";
+import Home from "@arcgis/core/widgets/Home";
+// import IwatchUtils from 'esri/core/watchUtils';
+import { watch } from '@arcgis/core/core/reactiveUtils';
 
 import { AppContext } from '../../contexts/AppContextProvider';
 
@@ -23,7 +24,7 @@ import {
     MapCenterLocation
 } from '../../utils/UrlHashParams';
 
-loadCss();
+// loadCss();
 
 type Props = {
     webmapId: string;
@@ -40,44 +41,30 @@ const MapView:React.FC<Props> = ({
 
     const mapDivRef = React.useRef<HTMLDivElement>();
 
-    const [ mapView, setMapView] = React.useState<IMapView>(null);
+    const [ mapView, setMapView] = React.useState<ArcGISMapView>(null);
 
     const initMapView = async()=>{
         
-        type Modules = [typeof IMapView, typeof IWebMap];
+        const defaultMapLocation = getMapLocationFromUrlHashParams();
 
-        try {
-            const [ 
-                MapView, 
-                WebMap 
-            ] = await (loadModules([
-                'esri/views/MapView',
-                'esri/WebMap',
-            ]) as Promise<Modules>);
+        const view = new ArcGISMapView({
+            container: mapDivRef.current,
+            map: new WebMap({
+                portalItem: {
+                    id: webmapId
+                }  
+            }),
+            padding: {
+                right: !isMobile ? UIConfig["sidebar-width"] : 0
+            },
+            zoom: defaultMapLocation ?  defaultMapLocation.zoom : undefined,
+            center: defaultMapLocation ? [ defaultMapLocation.lon, defaultMapLocation.lat ] : undefined
+        });
 
-            const defaultMapLocation = getMapLocationFromUrlHashParams();
+        view.when(()=>{
+            setMapView(view);
+        });
 
-            const view = new MapView({
-                container: mapDivRef.current,
-                map: new WebMap({
-                    portalItem: {
-                        id: webmapId
-                    }  
-                }),
-                padding: {
-                    right: !isMobile ? UIConfig["sidebar-width"] : 0
-                },
-                zoom: defaultMapLocation ?  defaultMapLocation.zoom : undefined,
-                center: defaultMapLocation ? [ defaultMapLocation.lon, defaultMapLocation.lat ] : undefined
-            });
-
-            view.when(()=>{
-                setMapView(view);
-            });
-
-        } catch(err){   
-            console.error(err);
-        }
     };
 
     const initEventListeners = async() => {
@@ -103,15 +90,16 @@ const MapView:React.FC<Props> = ({
             onClickHandler(mapPoint);
         });
 
-        type Modules = [typeof IwatchUtils];
+        // type Modules = [typeof IwatchUtils];
 
-        try {
-            const [watchUtils] = await (loadModules([
-                'esri/core/watchUtils',
-            ]) as Promise<Modules>);
-
-            watchUtils.whenTrue(mapView, 'stationary', () => {
+        watch(
+            () => mapView.stationary,
+            (stationary) => {
                 // console.log('mapview is stationary', mapView.center, mapView.zoom);
+
+                if(!stationary){
+                    return;
+                }
 
                 if (mapView.zoom === -1) {
                     return;
@@ -131,39 +119,21 @@ const MapView:React.FC<Props> = ({
 
                 saveMapLocationInUrlHashParams(centerLocation);
             });
-        } catch (err) {
-            console.error(err);
-        }
     };
 
     const initWidgets = async()=>{
 
-        type Modules = [typeof ILocateWidget, typeof IHomeWidget];
+        const locateWidget = new Locate({
+            view: mapView,   // Attaches the Locate button to the view
+        });
 
-        try {
-            const [ 
-                Locate, 
-                Home 
-            ] = await (loadModules([
-                'esri/widgets/Locate',
-                "esri/widgets/Home",
-            ]) as Promise<Modules>);
+        const homeWidget = new Home({
+            view: mapView
+        });
 
-            const locateWidget = new Locate({
-                view: mapView,   // Attaches the Locate button to the view
-            });
+        mapView.ui.add(locateWidget, "top-left");
 
-            const homeWidget = new Home({
-                view: mapView
-            });
-
-            mapView.ui.add(locateWidget, "top-left");
-
-            mapView.ui.add(homeWidget, "top-left");
-
-        } catch(err){   
-            console.error(err);
-        }
+        mapView.ui.add(homeWidget, "top-left");
     };
 
     React.useEffect(()=>{
