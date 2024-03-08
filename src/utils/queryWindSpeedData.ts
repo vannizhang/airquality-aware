@@ -10,10 +10,20 @@ export const queryWindSpeedData = async(queryLocation:QueryLocation):Promise<Win
 
     const serviceUrl = AppConfig["wind-speed-forecast-service"];
 
+    const { longitude, latitude } = queryLocation;
+
+    const geometry = {
+        x: longitude,
+        y: latitude,
+        spatialReference: {
+            wkid: 4326
+        }
+    }
+
     const params = {
         f: 'json',
         outFields: 'force,fromdate,todate,label',
-        geometry: JSON.stringify(queryLocation),
+        geometry: JSON.stringify(geometry),
         geometryType: 'esriGeometryPoint',
         spatialRel: 'esriSpatialRelIntersects',
         returnGeometry: 'false',

@@ -40,6 +40,14 @@ export const queryAirQualityData = async(queryLocation:QueryLocation):Promise<Ai
 
     const { longitude, latitude } = queryLocation;
 
+    const geometry = {
+        x: longitude,
+        y: latitude,
+        spatialReference: {
+            wkid: 4326
+        }
+    }
+
     if(longitude > bbox.xmax || longitude < bbox.xmin || latitude > bbox.ymax || latitude < bbox.ymin){
         throw new Error('No Data Available');
     }
@@ -47,7 +55,7 @@ export const queryAirQualityData = async(queryLocation:QueryLocation):Promise<Ai
     const params = {
         f: 'json',
         outFields: 'gridcode',
-        geometry: JSON.stringify(queryLocation),
+        geometry: JSON.stringify(geometry),
         geometryType: 'esriGeometryPoint',
         spatialRel: 'esriSpatialRelIntersects',
         returnGeometry: 'false'

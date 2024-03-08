@@ -21,10 +21,21 @@ const queryRaceInfo = async(queryLocation:QueryLocation): Promise<{
 
     const raceInfoServiceURL = AppConfig["race-info-service"];
 
+    const { longitude, latitude } = queryLocation;
+
+    const geometry = {
+        x: longitude,
+        y: latitude,
+        spatialReference: {
+            wkid: 4326
+        }
+    }
+
+
     const params = {
         f: 'json',
         outFields: '*',
-        geometry: JSON.stringify(queryLocation),
+        geometry: JSON.stringify(geometry),
         geometryType: 'esriGeometryPoint',
         spatialRel: 'esriSpatialRelIntersects',
         returnGeometry: 'false'
