@@ -1,4 +1,4 @@
-import './style.css';
+// import './style.css';
 import React from 'react'
 
 // import { loadModules } from 'esri-loader';
@@ -19,9 +19,16 @@ const SearchWidget:React.FC<Props> = ({
     searchCompletedHandler
 }:Props) => {
 
+    const searchWidgetRef = React.useRef<Search>(null);
+
+
     const init = async()=>{
 
         // type Modules = [typeof ISearchWidget];
+
+        if(searchWidgetRef.current){
+            return;
+        }
 
         try {
             // const [ 
@@ -36,6 +43,7 @@ const SearchWidget:React.FC<Props> = ({
                 popupEnabled: false,
                 container: containerRef.current
             });
+            searchWidgetRef.current = searchWidget;
 
             searchWidget.on('search-complete', evt=>{
                 if(searchWidget.results[0] && searchWidget.results[0].results[0]){
