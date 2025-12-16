@@ -48,6 +48,14 @@ module.exports =  (env, options)=> {
                     ],
                 },
                 {
+                    test: /\.css$/,
+                    include: /node_modules/,
+                    use: [
+                        MiniCssExtractPlugin.loader,
+                        "css-loader"
+                    ],
+                },
+                {
                     test: /\.(woff|woff2|ttf|eot)$/,
                     type: 'asset/resource',
                 },

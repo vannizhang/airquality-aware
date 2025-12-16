@@ -64,7 +64,7 @@
     "webpack-dev-server": "^5.2.2"
   },
   "dependencies": {
-    "@arcgis/core": "^4.29.7",
+    "@arcgis/core": "4.34",
     "axios": "^1.13.2",
     "calcite-web": "github:Esri/calcite-web#v1.2.5",
     "classnames": "^2.2.6",
