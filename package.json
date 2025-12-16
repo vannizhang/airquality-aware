@@ -65,15 +65,13 @@
   },
   "dependencies": {
     "@arcgis/core": "^4.29.7",
-    "axios": "^1.4.0",
+    "axios": "^1.13.2",
     "calcite-web": "github:Esri/calcite-web#v1.2.5",
     "classnames": "^2.2.6",
     "d3": "^7.9.0",
     "date-fns": "^2.16.1",
     "helper-toolkit-ts": "^1.1.13",
     "react": "^18.1.0",
-    "react-dom": "^18.1.0",
-    "shortid": "^2.2.15",
-    "styled-components": "^5.1.0"
+    "react-dom": "^18.1.0"
   }
 }
