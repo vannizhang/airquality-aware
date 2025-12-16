@@ -20,7 +20,8 @@ declare module 'air-quality-aware' {
     
     type AirQualityLayerFeature = {
         attributes: {
-            gridcode: number;
+            gridcode?: number;
+            MaxAQICat: AirQualityCategory;
         }
     };
 

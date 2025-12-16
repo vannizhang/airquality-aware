@@ -2,9 +2,11 @@ const AppConfig = {
     // 'webmap-id': '5f3b7605b3364e7bb2416c93fae00995', 
     'webmap-id': '102bad45f589411e901e3e5ea062743f', // https://www.arcgis.com/home/item.html?id=102bad45f589411e901e3e5ea062743f
     'ari-quality-service': {
+        // Per EPA, the latest air quality condition service will remain the same in the foreseeable future.
         'current': 'https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/AirNowLatestContoursCombined/FeatureServer/0',
-        'today': 'https://services.arcgis.com/cJ9YHowT8TU7DUyn/ArcGIS/rest/services/AirNowAQIForecast/FeatureServer/0',
-        'tomorrow': 'https://services.arcgis.com/cJ9YHowT8TU7DUyn/ArcGIS/rest/services/AirNowAQIForecast/FeatureServer/1'
+        // This is the updated forecast service with today and tomorrow provided by EPA
+        'today': 'https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/AirNow_National_Air_Quality_Index_(AQI)_Forecast/FeatureServer/0',
+        'tomorrow': 'https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/AirNow_National_Air_Quality_Index_(AQI)_Forecast/FeatureServer/1'
     },
     'wind-speed-forecast-service': 'https://services9.arcgis.com/RHVPKKiFTONKtxq3/ArcGIS/rest/services/NDFD_WindSpeed_v1/FeatureServer/0',
     'enriched-population-service': 'https://services.arcgis.com/nGt4QxSblgDfeJn9/arcgis/rest/services/AirQuality_Enriched/FeatureServer/0',
