@@ -177,7 +177,7 @@ export default class Donut extends React.PureComponent<Props, State> {
         this.init();
     }
 
-    render(): JSX.Element {
+    render(){
         return (
             <div
                 ref={this.containerRef}

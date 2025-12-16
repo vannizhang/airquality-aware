@@ -42,7 +42,7 @@ import {
 
 const App = () => {
 
-    const searchWidgetContainerRef = useRef<HTMLDivElement>();
+    const searchWidgetContainerRef = useRef<HTMLDivElement>(null);
     const [ airQualityForecast, setAirQualityForecast ] = useState<AirQualityForecast>();
     const [ windspeedForecast, setWindspeedForecast ] = useState<WindSpeedLayerFeature[]>();
     const [ populationData, setPopulationData ] = useState<PopulationData>();

@@ -12,7 +12,7 @@ type AppContextProps = {
 }
 
 type AppContextProviderProps = {
-    // children: React.ReactNode;
+    children: React.ReactNode;
 };
 
 export const AppContext = createContext<AppContextProps>(null);

@@ -29,6 +29,7 @@ import {
 type Props = {
     webmapId: string;
     onClickHandler: (data:QueryLocation)=>void;
+    children?: React.ReactNode;
 };
 
 const MapView:React.FC<Props> = ({
@@ -39,7 +40,7 @@ const MapView:React.FC<Props> = ({
 
     const { isMobile } = useContext(AppContext)
 
-    const mapDivRef = React.useRef<HTMLDivElement>();
+    const mapDivRef = React.useRef<HTMLDivElement>(null);
 
     const [ mapView, setMapView] = React.useState<ArcGISMapView>(null);
 

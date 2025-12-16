@@ -6,10 +6,17 @@ import { createRoot } from 'react-dom/client';
 import AppContextProvider from './contexts/AppContextProvider';
 import App from './components/App/App';
 
-const root = createRoot(document.getElementById('root'));
+const container = document.getElementById('root');
+if (!container) {
+    throw new Error('Root container not found');
+}
+
+const root = createRoot(container);
 
 root.render(
-    <AppContextProvider>
-        <App />
-    </AppContextProvider>
+    <React.StrictMode>
+        <AppContextProvider>
+            <App />
+        </AppContextProvider>
+    </React.StrictMode>
 );

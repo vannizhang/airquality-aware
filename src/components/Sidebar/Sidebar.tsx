@@ -12,6 +12,7 @@ type Props = {
     isContentVisible: boolean;
     toggleBtnOnclick: (val:boolean)=>void;
     infoBtnOnClick: ()=>void;
+    children?: React.ReactNode;
 }
 
 const Sidebar:React.FC<Props> = ({
