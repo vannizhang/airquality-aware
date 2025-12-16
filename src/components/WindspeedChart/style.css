@@ -1,0 +1,18 @@
+.line-chart-main-group .line-path {
+    fill: none;
+    stroke-width: 1.5px;
+}
+
+.line-chart-main-group .axis text {
+    fill: rgba(255,255,255,.5);
+}
+
+.line-chart-main-group .axis line {
+    stroke-opacity: 0.7;
+    shape-rendering: crispEdges;
+    stroke: rgba(220,220,220,.25);
+}
+
+.line-chart-main-group .axis path {
+    stroke: rgba(220,220,220,.1);
+}

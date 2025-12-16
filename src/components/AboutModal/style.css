@@ -1,0 +1,30 @@
+.modal-overlay {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.about-modal .modal-content {
+    position: relative;
+    background: #2f3d5e;
+    color: #E2E2E2;
+    padding: 2.5rem;
+}
+
+.about-modal .modal-content .close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+}
+
+.about-modal .modal-content .close-btn svg {
+    /* fill: rgb(140, 126, 82); */
+    stroke: #E2E2E2;
+}
+
+/* .about-modal .modal-content a {
+    color: #E2E2E2;
+} */
+
+.about-modal .modal-content b {
+    color: #40C4ED;
+}

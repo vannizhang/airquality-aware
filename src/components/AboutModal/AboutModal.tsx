@@ -1,4 +1,4 @@
-import './style.scss';
+import './style.css';
 import React, { useEffect } from 'react';
 import { modal, bus } from 'calcite-web/dist/js/calcite-web.min.js';
 

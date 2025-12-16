@@ -68,7 +68,7 @@ const AirQualityIndicator:React.FC<Props> = ({
 
         return keys.map(key=>{
 
-            const categeory:AirQualityCategory = data[key];
+            const categeory:AirQualityCategory = data[key as keyof AirQualityForecast];
             const color = ColorLookup[categeory];
             const forecastTime = key === 'current' 
                 ? 'Current' 
@@ -132,7 +132,7 @@ const AirQualityIndicator:React.FC<Props> = ({
         const keys = Object.keys(data);
 
         keys.forEach(key=>{
-            const catgeory:AirQualityCategory = data[key];
+            const catgeory:AirQualityCategory = data[key as keyof AirQualityForecast];
 
             if(activeCategories.indexOf(catgeory) === -1){
                 activeCategories.push(catgeory);

@@ -1,4 +1,4 @@
-import './style.scss';
+import './style.css';
 import React from 'react';
 import * as d3 from 'd3';
 import { WindSpeedLayerFeature } from 'air-quality-aware';
@@ -138,9 +138,10 @@ const LineChart:React.FC<LinChartProps> = ({
             .on("mouseleave", ()=>{
                 handleItemOnHover();
             })
-            .on("mousemove", function(){
+            .on("mousemove", function(event: MouseEvent){
                 if(tooltipTemplate || onHover){
-                    const mousePosX = d3.mouse(this)[0];
+                    const rect = (this as SVGRectElement).getBoundingClientRect();
+                    const mousePosX = event.clientX - rect.left;
                     // console.log(mousePosX);
                     const itemOnHover = getItemByMousePos(mousePosX);
     

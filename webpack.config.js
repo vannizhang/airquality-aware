@@ -21,7 +21,8 @@ module.exports =  (env, options)=> {
             path: path.resolve(__dirname, './dist'),
             filename: '[name].[contenthash].js',
             chunkFilename: '[name].[contenthash].js',
-            clean: true
+            clean: true,
+            assetModuleFilename: `[name][contenthash][ext][query]`
         },
         // devtool: 'source-map',
         resolve: {
@@ -43,27 +44,16 @@ module.exports =  (env, options)=> {
                             options: {
                                 sourceMap: true
                             }
-                        }, 
-                        {
-                            loader: "sass-loader", options: {
-                                sourceMap: true
-                            }
                         }
                     ],
                 },
-                { 
-                    test: /\.(woff|woff2|ttf|eot)$/,  
-                    loader: "file-loader",
-                    options: {
-                        name: '[name].[contenthash].[ext]',
-                    }
+                {
+                    test: /\.(woff|woff2|ttf|eot)$/,
+                    type: 'asset/resource',
                 },
-                { 
-                    test: /\.(png|jpg|gif|svg)$/,  
-                    loader: "file-loader",
-                    options: {
-                        name: '[name].[contenthash].[ext]',
-                    }
+                {
+                    test: /\.(png|jpg|gif|svg)$/,
+                    type: 'asset/resource',
                 },
             ]
         },
