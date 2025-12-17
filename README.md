@@ -11,12 +11,6 @@ Click on a location in the U.S. to see the AQI (including ozone and particulate 
 
 The National Weather Service’s 72-hour forecast for wind will also be displayed. Scroll down the page and find information for the same Census Tract on racial composition and other at-risk populations for degraded air quality.
 
-## Requirements
-
-- [ArcGIS API for JavaScript (version 4.17)](https://developers.arcgis.com/javascript/index.html)
-- [D3.js](https://d3js.org/)
-- [React.js](https://reactjs.org/)
-
 ## Resources
 - The Environmental Protection Agency [AirNow](https://www.airnow.gov/) program for current and future Air Quality Index information.
 - The NOAA National Weather Service [wind forecast](https://www.arcgis.com/home/item.html?id=47ed83c3b4f943118e848fbfc33d119e).
